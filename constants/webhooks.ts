@@ -1,0 +1,92 @@
+export const chains = [
+  { value: "43114", label: "Avalanche C-Chain (Mainnet)" },
+  { value: "43113", label: "Avalanche C-Chain (Fuji Testnet)" },
+  { value: "11111", label: "Avalanche P-Chain" },
+  { value: "22222", label: "Avalanche X-Chain" },
+];
+
+export const eventTypes = [
+  { value: "transaction", label: "Transaction" },
+  { value: "block", label: "Block" },
+  { value: "log", label: "Log" },
+  { value: "token_transfer", label: "Token Transfer" },
+  { value: "nft_transfer", label: "NFT Transfer" },
+];
+
+export const initialWebhooks = [
+  {
+    id: "1",
+    name: "Transaction Monitor",
+    url: "https://api.myapp.com/webhooks/transactions",
+    chainId: "43114",
+    eventType: "transaction",
+    addresses: ["0x71C7656EC7ab88b098defB751B7401B5f6d8976F"],
+    eventSignatures: ["Transfer(address,address,uint256)"],
+    status: "active",
+    created: "2 days ago",
+    lastDelivery: "5 minutes ago",
+    deliveryStatus: "success",
+    includeInternalTx: true,
+    includeLogs: false,
+  },
+  {
+    id: "2",
+    name: "Block Notifications",
+    url: "https://api.example.com/blocks",
+    chainId: "43113",
+    eventType: "block",
+    addresses: [],
+    eventSignatures: [],
+    status: "active",
+    created: "1 week ago",
+    lastDelivery: "2 minutes ago",
+    deliveryStatus: "success",
+    includeInternalTx: false,
+    includeLogs: true,
+  },
+  {
+    id: "3",
+    name: "NFT Tracker",
+    url: "https://nft-app.com/webhook",
+    chainId: "43114",
+    eventType: "nft_transfer",
+    addresses: ["0x1234567890123456789012345678901234567890"],
+    eventSignatures: ["Transfer(address,address,uint256)"],
+    status: "inactive",
+    created: "3 days ago",
+    lastDelivery: "1 hour ago",
+    deliveryStatus: "failed",
+    includeInternalTx: false,
+    includeLogs: false,
+  },
+];
+
+export const deliveryLogs = [
+  {
+    id: "1",
+    webhook: "Transaction Monitor",
+    event: "transaction",
+    timestamp: "2024-06-24 16:15:32",
+    status: "success",
+    responseCode: 200,
+    responseTime: "145ms",
+  },
+  {
+    id: "2",
+    webhook: "Block Notifications",
+    event: "block",
+    timestamp: "2024-06-24 16:14:28",
+    status: "success",
+    responseCode: 200,
+    responseTime: "89ms",
+  },
+  {
+    id: "3",
+    webhook: "NFT Tracker",
+    event: "nft_transfer",
+    timestamp: "2024-06-24 15:45:12",
+    status: "failed",
+    responseCode: 500,
+    responseTime: "timeout",
+  },
+]; 
