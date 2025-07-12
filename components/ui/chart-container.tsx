@@ -10,7 +10,7 @@ interface ChartContainerProps {
   isLoading: boolean;
   error?: Error;
   children: ReactElement;
-  config?: Record<string, any>;
+  config?: Record<string, unknown>;
   id?: string;
 }
 
@@ -21,8 +21,6 @@ export function ChartContainer({
   isLoading,
   error,
   children,
-  config = {},
-  id = 'chart',
 }: ChartContainerProps) {
   return (
     <Card className="border-border">

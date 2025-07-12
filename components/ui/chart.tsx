@@ -65,7 +65,7 @@ ChartContainer.displayName = "ChartContainer"
 
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   const colorConfig = Object.entries(config).filter(
-    ([_, config]) => config.theme || config.color
+    ([, config]) => config.theme || config.color
   )
 
   if (!colorConfig.length) {
@@ -111,14 +111,14 @@ interface ChartTooltipContentProps extends Omit<TooltipProps<ValueType, NameType
     value: ValueType
     name: string
     dataKey: string | number
-    payload: any
+    payload: Record<string, unknown>
     color?: string
     fill?: string
   }>
   label?: string
   color?: string
-  labelFormatter?: (value: any, payload: any) => React.ReactNode
-  formatter?: (value: ValueType, name: string, props: any, index: number, data: any) => React.ReactNode
+  labelFormatter?: (value: unknown, payload: Array<Record<string, unknown>>) => React.ReactNode
+  formatter?: (value: ValueType, name: string, props: Record<string, unknown>, index: number, data: Record<string, unknown>) => React.ReactNode
 }
 
 const ChartTooltipContent = React.forwardRef<HTMLDivElement, ChartTooltipContentProps>(

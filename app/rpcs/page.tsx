@@ -4,13 +4,12 @@ import { useState } from "react"
 import { Copy, Play, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/hooks/use-toast"
 import { ResponsiveContainer } from "@/components/ui/responsive-container"
 import { RPCSlider } from "@/components/ui/rpc-slider"
-import { ErrorBoundary, ErrorMessage } from "@/components/ui/error-boundary"
+import { ErrorBoundary } from "@/components/ui/error-boundary"
 import { useLoading } from "@/hooks/useLoading"
 import { enhancedToast } from "@/components/ui/enhanced-toast"
 
@@ -26,10 +25,6 @@ const endpoints = [
     wss: "wss://api.avax-test.network/ext/bc/C/ws",
   },
 ]
-
-const sampleRequest = `curl -s https://api.avax.network/ext/bc/C/rpc -H "Content-Type: application/json" -d '{"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []}'`
-
-const sampleResponse = `{"id":1,"jsonrpc":"2.0","result":"0x1e85267"}`
 
 const rpcMethods = [
   {
@@ -110,7 +105,7 @@ export default function RPCsPage() {
   const [customParams, setCustomParams] = useState("")
   const [response, setResponse] = useState("")
   
-  const { isLoading, error, withLoading, setError } = useLoading()
+  const { isLoading, withLoading } = useLoading()
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
@@ -184,7 +179,7 @@ export default function RPCsPage() {
           <RPCSlider />
         </div>
 
-        <ErrorMessage error={error} onRetry={() => setError(null)} />
+
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           {/* RPC Endpoints Section */}
@@ -326,7 +321,7 @@ export default function RPCsPage() {
                     id="params"
                     placeholder={`Default: ${rpcMethods.find(m => m.value === selectedMethod)?.example || '{"jsonrpc":"2.0","method":"[METHOD]","params":[],"id":1}'}`}
                     value={customParams}
-                    onChange={(e) => setCustomParams(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setCustomParams(e.target.value)}
                     className="font-mono text-sm"
                     rows={4}
                   />

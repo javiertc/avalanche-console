@@ -1,9 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Copy, Trash2, Plus, Settings, CheckCircle, XCircle, Clock, Key } from "lucide-react"
+import { Copy, Trash2, Settings, CheckCircle, XCircle, Clock } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
@@ -13,13 +12,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox"
 import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
-import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { toast } from "@/hooks/use-toast"
 import { WebhooksAPISlider } from "@/components/ui/webhooks-api-slider"
 import { ResponsiveContainer } from "@/components/ui/responsive-container"
 import { ResponsiveTable } from "@/components/ui/responsive-table"
-import { ErrorBoundary } from "@/components/ui/error-boundary"
 
 const chains = [
   { value: "43114", label: "Avalanche C-Chain (Mainnet)" },
@@ -116,7 +113,6 @@ const deliveryLogs = [
 
 export default function WebhooksAPIPage() {
   const [activeTab, setActiveTab] = useState("Webhooks")
-  const [webhooks, setWebhooks] = useState(initialWebhooks)
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [showDisabled, setShowDisabled] = useState(false)
   const [showSigningSecret, setShowSigningSecret] = useState(false)
@@ -125,10 +121,7 @@ export default function WebhooksAPIPage() {
   const [network, setNetwork] = useState("testnet")
   const [selectedChain, setSelectedChain] = useState("")
   const [webhookUrl, setWebhookUrl] = useState("")
-  const [addresses, setAddresses] = useState("")
   const [webhookName, setWebhookName] = useState("")
-  const [description, setDescription] = useState("")
-  const [eventSignatures, setEventSignatures] = useState("")
   const [includeInternalTx, setIncludeInternalTx] = useState(false)
   const [includeLogs, setIncludeLogs] = useState(false)
 
@@ -138,11 +131,6 @@ export default function WebhooksAPIPage() {
       title: "Copied to clipboard",
       description: "The URL has been copied to your clipboard.",
     })
-  }
-
-  const getStatusBadge = (status: string) => {
-    const variant = status === "active" ? "default" : "secondary"
-    return <Badge variant={variant}>{status}</Badge>
   }
 
   const getStatusIcon = (status: string) => {
@@ -156,7 +144,7 @@ export default function WebhooksAPIPage() {
     }
   }
 
-  const filteredWebhooks = showDisabled ? webhooks : webhooks.filter((w) => w.status === "active")
+  const filteredWebhooks = showDisabled ? initialWebhooks : initialWebhooks.filter((w) => w.status === "active")
 
   return (
     <ResponsiveContainer>
@@ -469,7 +457,7 @@ export default function WebhooksAPIPage() {
                     </Label>
                     <Input
                       value={webhookName}
-                      onChange={(e) => setWebhookName(e.target.value)}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWebhookName(e.target.value)}
                       placeholder="e.g., Transaction Monitor"
                       className="bg-background border-border text-foreground placeholder:text-muted-foreground h-7"
                     />
@@ -481,7 +469,7 @@ export default function WebhooksAPIPage() {
                     </Label>
                     <Input
                       value={webhookUrl}
-                      onChange={(e) => setWebhookUrl(e.target.value)}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWebhookUrl(e.target.value)}
                       placeholder="https://your-app.com/webhook/avalanche"
                       className="bg-background border-border text-foreground placeholder:text-muted-foreground h-7"
                     />
@@ -504,7 +492,7 @@ export default function WebhooksAPIPage() {
                   <Checkbox
                     id="includeInternalTx"
                     checked={includeInternalTx}
-                    onCheckedChange={(checked) => setIncludeInternalTx(checked === true)}
+                    onCheckedChange={(checked: boolean | "indeterminate") => setIncludeInternalTx(checked === true)}
                     className="border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary mt-0.5"
                   />
                   <div className="space-y-1">

@@ -1,5 +1,3 @@
-import { layoutStyles } from "@/lib/styles";
-
 interface PageHeaderProps {
   title: string;
   description?: string;

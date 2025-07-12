@@ -20,6 +20,7 @@ import { navigationItems } from "@/constants/navigation";
 import { ExternalLink, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FeedbackModal } from "@/components/ui/feedback-modal";
+import Image from 'next/image';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -59,7 +60,7 @@ export const AppLayout = memo(function AppLayout({ children }: AppLayoutProps) {
           <SidebarHeader className="p-6">
             <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity cursor-pointer">
               <div className="w-8 h-8 rounded overflow-hidden">
-                <img src="/avalanche-logo.png" alt="Avalanche" className="w-full h-full object-cover" />
+                <Image src="/avalanche-logo.png" alt="Avalanche" width={32} height={32} className="rounded" />
               </div>
               <div>
                 <div className="text-label-16 font-semibold text-foreground">Avalanche</div>

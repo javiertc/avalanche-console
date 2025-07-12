@@ -68,6 +68,7 @@ export function AnnouncementBanner() {
   const [isVisible, setIsVisible] = useState(true)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [isClosing, setIsClosing] = useState(false);
 
   // Auto-advance carousel
   useEffect(() => {
@@ -95,13 +96,18 @@ export function AnnouncementBanner() {
     setIsAutoPlaying(false)
   }
 
-  if (!isVisible) return null
+  useEffect(() => {
+    if (isClosing) {
+      const timer = setTimeout(() => setIsVisible(false), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [isClosing]);
 
-  const currentAnnouncement = announcements[currentIndex]
+  if (!isVisible && !isClosing) return null
 
   return (
     <div 
-      className="relative overflow-hidden w-full h-28 rounded-lg"
+      className={`relative overflow-hidden w-full transition-all duration-500 ${isClosing ? 'h-0' : 'h-28'} rounded-lg`}
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
@@ -110,7 +116,7 @@ export function AnnouncementBanner() {
         className="flex h-full transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {announcements.map((announcement, index) => (
+        {announcements.map((announcement) => (
           <div
             key={announcement.id}
             className={`relative flex-shrink-0 w-full h-full bg-gradient-to-r ${announcement.gradient} text-white`}
@@ -174,7 +180,7 @@ export function AnnouncementBanner() {
       <div className="absolute inset-0 pointer-events-none">
         {/* Close button */}
         <button
-          onClick={() => setIsVisible(false)}
+          onClick={() => setIsClosing(true)}
           className="absolute top-3 right-3 p-1 rounded-full hover:bg-white/20 transition-colors z-10 pointer-events-auto"
         >
           <X className="h-4 w-4 !text-white" />

@@ -1,4 +1,3 @@
-import { CheckCircle, XCircle, AlertTriangle, Info } from 'lucide-react'
 import { toast as baseToast } from '@/hooks/use-toast'
 
 interface ToastOptions {

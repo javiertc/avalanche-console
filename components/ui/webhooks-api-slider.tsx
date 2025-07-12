@@ -7,7 +7,7 @@ interface WebhookFeature {
   id: string
   title: string
   description: string
-  icon: any
+  icon: React.ComponentType<{ className?: string }>
   gradient: string
   codeExample: string
 }
@@ -78,6 +78,7 @@ export function WebhooksAPISlider() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const [isVisible, setIsVisible] = useState(true)
+  const [isClosing, setIsClosing] = useState(false);
 
   // Auto-advance slider
   useEffect(() => {
@@ -105,11 +106,18 @@ export function WebhooksAPISlider() {
     setIsAutoPlaying(false)
   }
 
-  if (!isVisible) return null
+  useEffect(() => {
+    if (isClosing) {
+      const timer = setTimeout(() => setIsVisible(false), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [isClosing]);
+
+  if (!isVisible && !isClosing) return null
 
   return (
     <div 
-      className="relative overflow-hidden h-64 sm:h-72 md:h-80 lg:h-56 rounded-lg"
+      className={`relative overflow-hidden transition-all duration-500 ${isClosing ? 'h-0' : 'h-64 sm:h-72 md:h-80 lg:h-56'} rounded-lg`}
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
@@ -118,7 +126,7 @@ export function WebhooksAPISlider() {
         className="flex h-full slider-transform"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {webhookFeatures.map((feature, index) => (
+        {webhookFeatures.map((feature) => (
           <div
             key={feature.id}
             className={`relative flex-shrink-0 w-full h-full bg-gradient-to-r ${feature.gradient} text-white`}
@@ -162,7 +170,7 @@ export function WebhooksAPISlider() {
       <div className="absolute inset-0 pointer-events-none">
         {/* Close button */}
         <button
-          onClick={() => setIsVisible(false)}
+          onClick={() => setIsClosing(true)}
           className="absolute top-2 right-2 sm:top-4 sm:right-4 p-1.5 sm:p-2 rounded-full hover:bg-white/20 transition-colors z-10 pointer-events-auto"
         >
           <X className="h-4 w-4 sm:h-5 sm:w-5 slider-control-icon" />

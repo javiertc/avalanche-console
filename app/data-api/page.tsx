@@ -30,12 +30,12 @@ const apiKeys = [
 const starterProjects = [
   {
     title: "Demo Wallet",
-    description: "A simple multichain wallet that pulls balances and token holdings from Avalanche's Data API.",
+    description: "A simple multichain wallet that pulls balances and token holdings from Avalanche&apos;s Data API.",
     icon: Wallet,
   },
   {
     title: "Transaction Report Application",
-    description: "Generates detailed AVAX and token-transfer reports for any address by using the Data API's transactions and transfers endpoints.",
+    description: "Generates detailed AVAX and token-transfer reports for any address by using the Data API&apos;s transactions and transfers endpoints.",
     icon: BarChart3,
   },
   {
@@ -50,7 +50,7 @@ const starterProjects = [
   },
   {
     title: "NFT Deployment",
-    description: "Deploy ERC-721 & ERC-1155 contracts to Fuji, upload metadata to Pinata IPFS, and auto-index them with the Data API NFT endpoints.",
+    description: "Deploy ERC-721 &amp; ERC-1155 contracts to Fuji, upload metadata to Pinata IPFS, and auto-index them with the Data API NFT endpoints.",
     icon: Palette,
   },
   {
@@ -184,7 +184,7 @@ export default function DataAPIPage() {
                   </div>
                 </div>
                 <div>
-                  <p className="mb-2 text-sm text-muted-foreground">Add the following code to a JavaScript file in your project. Execute it in your terminal with 'node yourFile.js' to retrieve the balance.</p>
+                  <p className="mb-2 text-sm text-muted-foreground">Add the following code to a JavaScript file in your project. Execute it in your terminal with &apos;node yourFile.js&apos; to retrieve the balance.</p>
                   <div className="relative">
                     <pre className="rounded-lg bg-muted p-4 font-mono text-sm">
 {`import { AvalancheSDK } from "@ava-labs/avalanche-sdk";

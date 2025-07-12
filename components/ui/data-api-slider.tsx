@@ -1,15 +1,14 @@
 "use client"
 
 import { memo } from "react"
-import { ChevronLeft, ChevronRight, X, Wallet, BarChart3, Zap, Shield, Globe, Code } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { ChevronLeft, ChevronRight, X, Wallet, BarChart3, Zap, Shield, Code } from "lucide-react"
 import { useSlider } from "@/hooks/useSlider"
 
 interface APIFeature {
   id: string
   title: string
   description: string
-  icon: any
+  icon: React.ComponentType<{ className?: string }>
   gradient: string
   codeExample: string
 }
@@ -83,6 +82,8 @@ export const DataAPISlider = memo(function DataAPISlider() {
     autoPlayEnabled: true
   })
 
+
+
   if (!isVisible) return null
 
   return (
@@ -96,11 +97,10 @@ export const DataAPISlider = memo(function DataAPISlider() {
         className="flex h-full slider-transform"
         style={sliderTransformStyle}
       >
-        {apiFeatures.map((feature, index) => (
+        {apiFeatures.map((feature) => (
           <SlideContent 
             key={feature.id} 
-            feature={feature} 
-            isActive={index === currentIndex}
+            feature={feature}
           />
         ))}
       </div>
@@ -120,11 +120,9 @@ export const DataAPISlider = memo(function DataAPISlider() {
 
 // Separate slide content component for better performance
 const SlideContent = memo(function SlideContent({ 
-  feature, 
-  isActive 
+  feature
 }: { 
   feature: APIFeature
-  isActive: boolean 
 }) {
   return (
     <div

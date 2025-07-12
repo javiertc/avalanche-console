@@ -3,13 +3,12 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
-import { Code, Globe, Zap } from "lucide-react";
 import { CopyButton } from '@/components/common/CopyButton';
 import { ResponsiveContainer } from "@/components/ui/responsive-container";
 
 import { MetricsAPISlider } from "@/components/ui/metrics-api-slider";
-import { METRICS_API_BASE_URL, AVALANCHE_CHAINS, METRIC_TYPES, CODE_EXAMPLES } from '@/constants/metrics';
+import { METRICS_API_BASE_URL, METRIC_TYPES, CODE_EXAMPLES } from '@/constants/metrics';
+import { Zap } from "lucide-react";
 
 export default function MetricsAPIPage() {
   const [activeTab, setActiveTab] = useState("curl");

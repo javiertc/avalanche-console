@@ -24,7 +24,7 @@ export function CopyButton({
         title: "Success",
         description: successMessage,
       });
-    } catch (error) {
+    } catch {
       toast({
         title: "Error",
         description: "Failed to copy to clipboard",

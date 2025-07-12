@@ -72,11 +72,11 @@ export const AsyncForm = memo(function AsyncForm({
         }))
       }, 3000)
 
-    } catch (error: any) {
+    } catch (error: unknown) {
       setState(prev => ({
         ...prev,
         isLoading: false,
-        error: error.message || 'An unexpected error occurred'
+        error: (error as Error).message || 'An unexpected error occurred'
       }))
     }
   }, [onSubmit, resetOnSuccess])

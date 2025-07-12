@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { Copy } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -177,7 +176,7 @@ export default function Faucet() {
             </p>
           </div>
           <div className="rounded-lg border border-border bg-card text-card-foreground">
-            <CardContent className="p-0">
+            <div className="p-0">
               <Tabs value={activeCodeTab} onValueChange={setActiveCodeTab}>
                 <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0 border-border">
                   {Object.keys(codeSnippets).map((tab) => (
@@ -234,7 +233,7 @@ export default function Faucet() {
                   </TabsContent>
                 ))}
               </Tabs>
-            </CardContent>
+            </div>
           </div>
         </div>
       </div>

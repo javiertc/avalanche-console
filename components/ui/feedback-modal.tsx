@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useCallback, useEffect, memo } from "react"
-import { X, MessageSquare } from "lucide-react"
+import { X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/hooks/use-toast"
@@ -60,7 +60,7 @@ export const FeedbackModal = memo(function FeedbackModal({ isOpen, onClose }: Fe
       setFeedback("")
       setSuccess(true)
       onClose()
-    } catch (err: any) {
+    } catch (err) {
       setError(err.message || 'Failed to submit feedback')
     }
   }, [feedback, setLoading, setError, setSuccess, onClose])
@@ -124,7 +124,7 @@ export const FeedbackModal = memo(function FeedbackModal({ isOpen, onClose }: Fe
           
           {/* Error Display */}
           {error && (
-            <div className="text-sm text-red-600 bg-red-50 p-3 rounded-md">
+            <div className="text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-500/10 p-3 rounded-md border border-red-200 dark:border-red-500/20">
               {error}
             </div>
           )}
@@ -133,7 +133,7 @@ export const FeedbackModal = memo(function FeedbackModal({ isOpen, onClose }: Fe
             <Button
               onClick={handleSubmit}
               disabled={isLoading || !feedback.trim()}
-              className="bg-black hover:bg-gray-800 text-white px-8 py-2 disabled:opacity-50"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-2 disabled:opacity-50 dark:bg-primary dark:hover:bg-primary/80"
             >
               {isLoading ? "Submitting..." : "Submit"}
             </Button>

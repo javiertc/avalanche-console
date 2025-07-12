@@ -7,14 +7,14 @@ import { Button } from './button'
 import { useIsMobile } from '@/hooks/use-mobile'
 
 interface ResponsiveTableProps {
-  data: Array<Record<string, any>>
+  data: Array<Record<string, unknown>>
   columns: Array<{
     key: string
     label: string
-    render?: (value: any, row: Record<string, any>) => React.ReactNode
+    render?: (value: unknown, row: Record<string, unknown>) => React.ReactNode
     mobileHidden?: boolean
   }>
-  mobileCardRender?: (row: Record<string, any>, index: number) => React.ReactNode
+  mobileCardRender?: (row: Record<string, unknown>, index: number) => React.ReactNode
   className?: string
 }
 

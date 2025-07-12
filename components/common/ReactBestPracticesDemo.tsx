@@ -130,7 +130,7 @@ const ReactBestPracticesDemo = memo(function ReactBestPracticesDemo({
   const { isLoading, setLoading } = useAsyncForm()
   
   // ✅ Best Practice: Performance monitoring
-  const { getMetrics, logMetrics } = usePerformance('ReactBestPracticesDemo')
+  const { logMetrics } = usePerformance('ReactBestPracticesDemo')
 
   // ✅ Best Practice: Memoized filtered data
   const filteredPractices = useMemo(() => {
