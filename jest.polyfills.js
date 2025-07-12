@@ -4,4 +4,12 @@ global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;
 
 // Add fetch polyfill
-require('whatwg-fetch'); 
+require('whatwg-fetch');
+global.TransformStream = require('web-streams-polyfill').TransformStream;
+global.BroadcastChannel = class BroadcastChannel {
+  constructor() {}
+  postMessage() {}
+  addEventListener() {}
+  removeEventListener() {}
+  close() {}
+}; 

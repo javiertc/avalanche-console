@@ -13,6 +13,7 @@ import { Card } from "@/components/ui/card"
 import { ResponsiveContainer } from "@/components/ui/responsive-container"
 import { ErrorBoundary } from "@/components/ui/error-boundary"
 import { DataAPISlider } from "@/components/ui/data-api-slider"
+import { copyToClipboard } from '@/lib/utils'
 
 const apiKeys = [
   {
@@ -64,14 +65,6 @@ export default function DataAPIPage() {
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [keyName, setKeyName] = useState("")
   const [activeSDK, setActiveSDK] = useState("javascript")
-
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
-    toast({
-      title: "Copied to clipboard",
-      description: "The content has been copied to your clipboard.",
-    })
-  }
 
   return (
     <ResponsiveContainer>

@@ -17,6 +17,8 @@ import { toast } from "@/hooks/use-toast"
 import { WebhooksAPISlider } from "@/components/ui/webhooks-api-slider"
 import { ResponsiveContainer } from "@/components/ui/responsive-container"
 import { ResponsiveTable } from "@/components/ui/responsive-table"
+import { copyToClipboard } from '@/lib/utils'
+import type { Webhook, DeliveryLog } from '@/types/webhooks'
 
 const chains = [
   { value: "43114", label: "Avalanche C-Chain (Mainnet)" },
@@ -33,7 +35,7 @@ const eventTypes = [
   { value: "nft_transfer", label: "NFT Transfer" },
 ]
 
-const initialWebhooks = [
+const initialWebhooks: Webhook[] = [
   {
     id: "1",
     name: "Transaction Monitor",
@@ -81,7 +83,7 @@ const initialWebhooks = [
   },
 ]
 
-const deliveryLogs = [
+const deliveryLogs: DeliveryLog[] = [
   {
     id: "1",
     webhook: "Transaction Monitor",
@@ -124,14 +126,6 @@ export default function WebhooksAPIPage() {
   const [webhookName, setWebhookName] = useState("")
   const [includeInternalTx, setIncludeInternalTx] = useState(false)
   const [includeLogs, setIncludeLogs] = useState(false)
-
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
-    toast({
-      title: "Copied to clipboard",
-      description: "The URL has been copied to your clipboard.",
-    })
-  }
 
   const getStatusIcon = (status: string) => {
     switch (status) {
