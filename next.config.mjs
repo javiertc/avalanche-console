@@ -17,7 +17,16 @@ const nextConfig = {
   },
   images: {
     unoptimized: false,
-    domains: ['api.avax.network', 'developers.avacloud.io'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'api.avax.network',
+      },
+      {
+        protocol: 'https',
+        hostname: 'developers.avacloud.io',
+      },
+    ],
     formats: ['image/avif', 'image/webp'],
   },
   compiler: {
