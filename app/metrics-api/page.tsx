@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CopyButton } from '@/components/common/CopyButton';
+import { CopyButton, CodeExampleTabs, codeExamplePresets } from '@/components/common';
 import { ResponsiveContainer } from "@/components/ui/responsive-container";
 
 import { MetricsAPISlider } from "@/components/ui/metrics-api-slider";
@@ -62,76 +62,14 @@ export default function MetricsAPIPage() {
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Left Column - Code Examples */}
           <section aria-labelledby="code-examples-heading" className="lg:col-span-2">
-            <Card className="h-fit">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-base">
-                  <h3 id="code-examples-heading">Code Examples</h3>
-                </CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  Ready-to-use snippets for API integration
-                </p>
-              </CardHeader>
-              <CardContent>
-                <Tabs value={activeTab} onValueChange={setActiveTab}>
-                  <TabsList 
-                    className="grid w-full grid-cols-4"
-                    role="tablist"
-                    aria-label="Code examples in different programming languages"
-                  >
-                    {Object.entries(CODE_EXAMPLES).map(([key, example]) => (
-                      <TabsTrigger 
-                        key={key} 
-                        value={key} 
-                        className="text-xs"
-                        role="tab"
-                        aria-selected={activeTab === key}
-                        aria-controls={`panel-${key}`}
-                        id={`tab-${key}`}
-                      >
-                        {example.title}
-                      </TabsTrigger>
-                    ))}
-                  </TabsList>
-
-                  {Object.entries(CODE_EXAMPLES).map(([key, example]) => (
-                    <TabsContent 
-                      key={key} 
-                      value={key} 
-                      className="mt-4"
-                      role="tabpanel"
-                      id={`panel-${key}`}
-                      aria-labelledby={`tab-${key}`}
-                    >
-                      <div className="relative">
-                        <pre 
-                          className="bg-muted p-3 rounded-md overflow-x-auto text-xs max-h-64"
-                          role="region"
-                          aria-label={`${example.title} code example`}
-                          tabIndex={0}
-                        >
-                          <code 
-                            className="text-foreground"
-                            aria-label={`${example.title} code snippet`}
-                          >
-                            {example.code}
-                          </code>
-                        </pre>
-                        <div className="absolute top-2 right-2">
-                          <CopyButton
-                            text={example.code}
-                            variant="ghost"
-                            size="sm"
-                            className="text-muted-foreground hover:text-foreground"
-                            successMessage="Code copied!"
-                            aria-label={`Copy ${example.title} code to clipboard`}
-                          />
-                        </div>
-                      </div>
-                    </TabsContent>
-                  ))}
-                </Tabs>
-              </CardContent>
-            </Card>
+            <CodeExampleTabs
+              title="Code Examples"
+              subtitle="Ready-to-use snippets for API integration"
+              examples={codeExamplePresets.metricsApi(CODE_EXAMPLES)}
+              defaultTab="curl"
+              showCard={true}
+              className="h-fit"
+            />
           </section>
 
           {/* Right Column - Available Metrics */}

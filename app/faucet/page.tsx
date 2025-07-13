@@ -6,12 +6,13 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { toast } from "@/hooks/use-toast"
 import { networks, tokens, codeSnippets } from "@/constants/faucet"
 import { ResponsiveContainer } from "@/components/ui/responsive-container"
 import { FaucetSlider } from "@/components/ui/faucet-slider"
 import { layoutStyles } from "@/lib/styles"
+import { copyToClipboard } from "@/lib/utils"
+import { CodeExampleTabs, codeExamplePresets } from "@/components/common"
 
 export default function Faucet() {
   const [selectedNetwork, setSelectedNetwork] = useState("fuji-c")
@@ -20,13 +21,7 @@ export default function Faucet() {
   const [couponCode, setCouponCode] = useState("")
   const [activeCodeTab, setActiveCodeTab] = useState("Javascript SDK")
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
-    toast({
-      title: "Copied to clipboard",
-      description: "The code has been copied to your clipboard.",
-    })
-  }
+
 
   const requestFunds = () => {
     if (!address.trim()) {
@@ -168,74 +163,13 @@ export default function Faucet() {
         </div>
 
         {/* Using Code Section */}
-        <div className="space-y-4 sm:space-y-6">
-          <div>
-            <h3 className="text-base sm:text-lg font-medium text-foreground">Using Code</h3>
-            <p className="text-sm text-muted-foreground mt-1">
-              Request funds from the faucet programmatically
-            </p>
-          </div>
-          <div className="rounded-lg border border-border bg-card text-card-foreground">
-            <div className="p-0">
-              <Tabs value={activeCodeTab} onValueChange={setActiveCodeTab}>
-                <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0 border-border">
-                  {Object.keys(codeSnippets).map((tab) => (
-                    <TabsTrigger
-                      key={tab}
-                      value={tab}
-                      className="rounded-none border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:bg-transparent text-foreground"
-                    >
-                      {tab}
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
-
-                {Object.entries(codeSnippets).map(([tab, snippet]) => (
-                  <TabsContent key={tab} value={tab} className={layoutStyles.tabContent}>
-                    <div>
-                      <p className="text-sm text-muted-foreground mb-3">
-                        First, initialize a Node.js project, then install the Avalanche SDK.
-                      </p>
-                      {snippet.install && (
-                        <div className="flex items-center justify-between bg-muted p-3 rounded-md mb-4">
-                          <code className="text-sm text-foreground">{snippet.install}</code>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => copyToClipboard(snippet.install)}
-                            className="text-muted-foreground hover:text-foreground"
-                          >
-                            <Copy className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      )}
-                    </div>
-
-                    <div>
-                      <p className="text-sm text-muted-foreground mb-3">
-                        Add the following code to a JavaScript file in your project. Execute it in your terminal with
-                        `node yourFile.js` to retrieve the balance.
-                      </p>
-                      <div className="relative">
-                        <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-                          <code className="text-foreground">{snippet.code}</code>
-                        </pre>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="absolute top-2 right-2 text-muted-foreground hover:text-foreground"
-                          onClick={() => copyToClipboard(snippet.code)}
-                        >
-                          <Copy className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
-                  </TabsContent>
-                ))}
-              </Tabs>
-            </div>
-          </div>
-        </div>
+        <CodeExampleTabs
+          title="Using Code"
+          subtitle="Request funds from the faucet programmatically"
+          examples={codeExamplePresets.faucet(codeSnippets)}
+          defaultTab="Javascript SDK"
+          className="space-y-4 sm:space-y-6"
+        />
       </div>
     </ResponsiveContainer>
   )

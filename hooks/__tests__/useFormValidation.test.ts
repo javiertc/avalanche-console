@@ -1,6 +1,9 @@
 import { renderHook, act } from '@testing-library/react';
 import { useFormValidation } from '../useFormValidation';
 
+// Import FieldValue type from the validation module
+type FieldValue = Parameters<ReturnType<typeof useFormValidation>['validate']>[1];
+
 describe('useFormValidation', () => {
   const basicRules = {
     email: {
@@ -18,9 +21,10 @@ describe('useFormValidation', () => {
       pattern: /^[a-zA-Z0-9_]+$/
     },
     age: {
-      custom: (value: number) => {
-        if (value < 18) return 'Must be at least 18 years old';
-        if (value > 120) return 'Invalid age';
+      custom: (value: FieldValue) => {
+        const numValue = typeof value === 'number' ? value : Number(value);
+        if (numValue < 18) return 'Must be at least 18 years old';
+        if (numValue > 120) return 'Invalid age';
         return null;
       }
     }

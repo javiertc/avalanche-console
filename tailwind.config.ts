@@ -182,5 +182,17 @@ const config: Config = {
   	}
   },
   plugins: [require("tailwindcss-animate")],
+  safelist: [
+    // Gradient colors used in sliders
+    'from-blue-600', 'via-purple-600', 'to-indigo-600',
+    'from-emerald-600', 'via-teal-600', 'to-cyan-600',
+    'from-orange-600', 'via-red-600', 'to-pink-600',
+    'from-violet-600', 'via-purple-600', 'to-fuchsia-600',
+    'from-purple-600', 'via-pink-600', 'to-rose-600',
+    'from-orange-600', 'via-amber-600', 'to-yellow-600',
+    'from-emerald-600', 'via-green-600', 'to-lime-600',
+    'from-blue-600', 'via-cyan-600', 'to-teal-600',
+    'from-blue-600', 'via-indigo-600', 'to-purple-600',
+  ]
 };
 export default config;

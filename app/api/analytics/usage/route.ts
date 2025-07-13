@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { ApiUsageData } from '@/types/analytics';
+import { withApiErrorHandler, ApiError } from '@/lib/api-error';
 
 // This would typically come from your database or analytics service
 const mockApiUsageData: ApiUsageData[] = [
@@ -12,9 +13,20 @@ const mockApiUsageData: ApiUsageData[] = [
   { date: "Dec 24", dataApi: 2100, rpc: 1300, webhooks: 67, total: 3467 },
 ];
 
-export async function GET() {
+export const GET = withApiErrorHandler(async (request: Request) => {
+  // Example: Check for authentication (in real app, use proper auth)
+  const authHeader = request.headers.get('authorization');
+  if (!authHeader) {
+    throw ApiError.unauthorized('API key required');
+  }
+  
   // Add artificial delay to simulate real API latency
   await new Promise(resolve => setTimeout(resolve, 500));
   
+  // Example: Simulate potential database error
+  if (Math.random() < 0.1) { // 10% chance of error for demo
+    throw ApiError.internal('Database connection failed');
+  }
+  
   return NextResponse.json(mockApiUsageData);
-} 
+}); 

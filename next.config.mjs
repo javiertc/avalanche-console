@@ -7,11 +7,11 @@ const withBundleAnalyzer = bundleAnalyzer({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    // Temporarily ignore during builds to fix issues
+    // TODO: Enable after fixing all linting errors
     ignoreDuringBuilds: true,
   },
   typescript: {
-    // Temporarily ignore build errors to fix issues
+    // TODO: Enable after fixing all TypeScript errors
     ignoreBuildErrors: true,
   },
   images: {

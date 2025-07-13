@@ -13,7 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { toast } from "@/hooks/use-toast"
+
 import { WebhooksAPISlider } from "@/components/ui/webhooks-api-slider"
 import { ResponsiveContainer } from "@/components/ui/responsive-container"
 import { ResponsiveTable } from "@/components/ui/responsive-table"
@@ -206,26 +206,26 @@ export default function WebhooksAPIPage() {
 
             {/* Webhooks Table */}
             <ResponsiveTable
-              data={filteredWebhooks}
+              data={filteredWebhooks as unknown as Record<string, unknown>[]}
               columns={[
                 {
                   key: 'status',
                   label: 'Status',
-                  render: (status) => (
+                  render: (status: unknown) => (
                     <Badge variant={status === "active" ? "default" : "secondary"} className="text-xs">
-                      {status}
+                      {String(status)}
                     </Badge>
                   )
                 },
                 {
                   key: 'url',
                   label: 'URL',
-                  render: (url) => (
+                  render: (url: unknown) => (
                     <div className="flex items-center space-x-2">
                       <code className="text-xs bg-muted px-2 py-1 rounded truncate text-foreground max-w-[200px]">
-                        {url}
+                        {String(url)}
                       </code>
-                      <Button variant="ghost" size="icon" onClick={() => copyToClipboard(url)}>
+                      <Button variant="ghost" size="icon" onClick={() => copyToClipboard(String(url))}>
                         <Copy className="h-4 w-4" />
                       </Button>
                     </div>
@@ -235,9 +235,9 @@ export default function WebhooksAPIPage() {
                   key: 'chainId',
                   label: 'Chain',
                   mobileHidden: true,
-                  render: (chainId) => (
+                  render: (chainId: unknown) => (
                     <Badge variant="outline" className="border-border text-foreground text-xs">
-                      {chainId}
+                      {String(chainId)}
                     </Badge>
                   )
                 },
@@ -245,9 +245,9 @@ export default function WebhooksAPIPage() {
                   key: 'eventType',
                   label: 'Event',
                   mobileHidden: true,
-                  render: (eventType) => (
+                  render: (eventType: unknown) => (
                     <Badge variant="outline" className="border-border text-foreground text-xs">
-                      {eventType}
+                      {String(eventType)}
                     </Badge>
                   )
                 },
@@ -255,57 +255,63 @@ export default function WebhooksAPIPage() {
                   key: 'addresses',
                   label: 'Addresses',
                   mobileHidden: true,
-                  render: (addresses) => (
-                    <div>
-                      {addresses.length > 0 ? (
-                        <div className="space-y-1">
-                          {addresses.slice(0, 1).map((addr: string, idx: number) => (
-                            <div
-                              key={idx}
-                              className="text-xs font-mono bg-muted px-2 py-1 rounded truncate text-foreground max-w-[120px]"
-                            >
-                              {addr.slice(0, 10)}...
-                            </div>
-                          ))}
-                          {addresses.length > 1 && (
-                            <div className="text-xs text-muted-foreground">
-                              +{addresses.length - 1} more
-                            </div>
-                          )}
-                        </div>
-                      ) : (
-                        <span className="text-muted-foreground text-xs">All</span>
-                      )}
-                    </div>
-                  )
+                  render: (addresses: unknown) => {
+                    const addrArray = Array.isArray(addresses) ? addresses : []
+                    return (
+                      <div>
+                        {addrArray.length > 0 ? (
+                          <div className="space-y-1">
+                            {addrArray.slice(0, 1).map((addr, idx) => (
+                              <div
+                                key={idx}
+                                className="text-xs font-mono bg-muted px-2 py-1 rounded truncate text-foreground max-w-[120px]"
+                              >
+                                {String(addr).slice(0, 10)}...
+                              </div>
+                            ))}
+                            {addrArray.length > 1 && (
+                              <div className="text-xs text-muted-foreground">
+                                +{addrArray.length - 1} more
+                              </div>
+                            )}
+                          </div>
+                        ) : (
+                          <span className="text-muted-foreground text-xs">All</span>
+                        )}
+                      </div>
+                    )
+                  }
                 },
                 {
                   key: 'eventSignatures',
                   label: 'Signatures',
                   mobileHidden: true,
-                  render: (eventSignatures) => (
-                    <div>
-                      {eventSignatures.length > 0 ? (
-                        <div className="space-y-1">
-                          {eventSignatures.slice(0, 1).map((sig: string, idx: number) => (
-                            <div
-                              key={idx}
-                              className="text-xs font-mono bg-muted px-2 py-1 rounded truncate text-foreground max-w-[120px]"
-                            >
-                              {sig.split('(')[0]}(...)
-                            </div>
-                          ))}
-                          {eventSignatures.length > 1 && (
-                            <div className="text-xs text-muted-foreground">
-                              +{eventSignatures.length - 1} more
-                            </div>
-                          )}
-                        </div>
-                      ) : (
-                        <span className="text-muted-foreground text-xs">All</span>
-                      )}
-                    </div>
-                  )
+                  render: (eventSignatures: unknown) => {
+                    const sigArray = Array.isArray(eventSignatures) ? eventSignatures : []
+                    return (
+                      <div>
+                        {sigArray.length > 0 ? (
+                          <div className="space-y-1">
+                            {sigArray.slice(0, 1).map((sig, idx) => (
+                              <div
+                                key={idx}
+                                className="text-xs font-mono bg-muted px-2 py-1 rounded truncate text-foreground max-w-[120px]"
+                              >
+                                {String(sig).split('(')[0]}(...)
+                              </div>
+                            ))}
+                            {sigArray.length > 1 && (
+                              <div className="text-xs text-muted-foreground">
+                                +{sigArray.length - 1} more
+                              </div>
+                            )}
+                          </div>
+                        ) : (
+                          <span className="text-muted-foreground text-xs">All</span>
+                        )}
+                      </div>
+                    )
+                  }
                 },
                 {
                   key: 'created',

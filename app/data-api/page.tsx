@@ -5,7 +5,7 @@ import { Copy, ExternalLink, Wallet, BarChart3, Factory, Eye, Palette, Download 
 import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { toast } from "@/hooks/use-toast"
+
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -14,6 +14,8 @@ import { ResponsiveContainer } from "@/components/ui/responsive-container"
 import { ErrorBoundary } from "@/components/ui/error-boundary"
 import { DataAPISlider } from "@/components/ui/data-api-slider"
 import { copyToClipboard } from '@/lib/utils'
+import { CopyButton, CodeSnippet, CodeExampleTabs, codeExamplePresets } from '@/components/common'
+import { DATA_API_CODE_EXAMPLES } from '@/constants/code-examples'
 
 const apiKeys = [
   {
@@ -113,9 +115,12 @@ export default function DataAPIPage() {
                 <TableCell>{key.requests}</TableCell>
                 <TableCell>{key.created}</TableCell>
                 <TableCell className="text-right">
-                  <Button variant="ghost" size="icon" onClick={() => copyToClipboard(key.key)}>
-                    <Copy className="h-4 w-4" />
-                  </Button>
+                  <CopyButton 
+                    text={key.key} 
+                    variant="ghost" 
+                    size="icon"
+                    successMessage="API key copied!"
+                  />
                 </TableCell>
               </TableRow>
             ))}
@@ -124,291 +129,45 @@ export default function DataAPIPage() {
       </div>
 
       {/* Sample Code */}
-      <div className="space-y-4">
-        <div>
-          <h3 className="text-lg font-medium">Sample Code</h3>
-          <p className="text-sm text-muted-foreground">Helpful code snippets to get started</p>
-        </div>
-        
-        <div className="rounded-md border">
-          <Tabs value={activeSDK} onValueChange={setActiveSDK} className="w-full">
-            <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0">
-              <TabsTrigger
-                value="javascript"
-                className="rounded-none border-b-2 border-transparent px-4 py-3 font-medium text-muted-foreground hover:text-foreground data-[state=active]:border-foreground data-[state=active]:text-foreground"
-              >
-                Javascript SDK
-              </TabsTrigger>
-              <TabsTrigger
-                value="python"
-                className="rounded-none border-b-2 border-transparent px-4 py-3 font-medium text-muted-foreground hover:text-foreground data-[state=active]:border-foreground data-[state=active]:text-foreground"
-              >
-                Python SDK
-              </TabsTrigger>
-              <TabsTrigger
-                value="go"
-                className="rounded-none border-b-2 border-transparent px-4 py-3 font-medium text-muted-foreground hover:text-foreground data-[state=active]:border-foreground data-[state=active]:text-foreground"
-              >
-                Go SDK
-              </TabsTrigger>
-              <TabsTrigger
-                value="curl"
-                className="rounded-none border-b-2 border-transparent px-4 py-3 font-medium text-muted-foreground hover:text-foreground data-[state=active]:border-foreground data-[state=active]:text-foreground"
-              >
-                Curl
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value="javascript" className="p-4">
-              <div className="space-y-4">
-                <div>
-                  <p className="mb-2 text-sm text-muted-foreground">First, initialize a Node.js project, then install the Avalanche SDK.</p>
-                  <div className="relative">
-                    <pre className="rounded-lg bg-muted p-4 font-mono text-sm">
-                      npm install @avalanche-sdk/sdk
-                    </pre>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="absolute right-2 top-2"
-                      onClick={() => copyToClipboard("npm install @avalanche-sdk/sdk")}
-                    >
-                      <Copy className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-                <div>
-                  <p className="mb-2 text-sm text-muted-foreground">Add the following code to a JavaScript file in your project. Execute it in your terminal with &apos;node yourFile.js&apos; to retrieve the balance.</p>
-                  <div className="relative">
-                    <pre className="rounded-lg bg-muted p-4 font-mono text-sm">
-{`import { AvalancheSDK } from "@ava-labs/avalanche-sdk";
-
-const avax = new AvalancheSDK({
-  serverURL: "https://api.avax.network",
-  chainId: "43114",
-});
-
-async function run() {
-  const balance = await avax.evm.address.balances.getNative({
-    address: "0x71C7656EC7ab88b098defB751B7401B5f6d8976F",
-    blockTag: "latest",
-    currency: "usd",
-  });
-
-  console.log(balance);
-}
-
-run();`}
-                    </pre>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="absolute right-2 top-2"
-                      onClick={() => copyToClipboard(`import { AvalancheSDK } from "@ava-labs/avalanche-sdk";
-
-const avax = new AvalancheSDK({
-  serverURL: "https://api.avax.network",
-  chainId: "43114",
-});
-
-async function run() {
-  const balance = await avax.evm.address.balances.getNative({
-    address: "0x71C7656EC7ab88b098defB751B7401B5f6d8976F",
-    blockTag: "latest",
-    currency: "usd",
-  });
-
-  console.log(balance);
-}
-
-run();`)}
-                    >
-                      <Copy className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </TabsContent>
-            <TabsContent value="python" className="p-4">
-              <div className="space-y-4">
-                <div>
-                  <p className="mb-2 text-sm text-muted-foreground">First, install the Avalanche SDK using pip.</p>
-                  <div className="relative">
-                    <pre className="rounded-lg bg-muted p-4 font-mono text-sm">
-                      pip install avalanche-sdk-python
-                    </pre>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="absolute right-2 top-2"
-                      onClick={() => copyToClipboard("pip install avalanche-sdk-python")}
-                    >
-                      <Copy className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-                <div>
-                  <p className="mb-2 text-sm text-muted-foreground">Add the following code to a Python file and run it to retrieve the balance.</p>
-                  <div className="relative">
-                    <pre className="rounded-lg bg-muted p-4 font-mono text-sm">
-{`from avalanche_sdk import AvalancheSDK
-
-avax = AvalancheSDK(
-    server_url="https://api.avax.network",
-    chain_id="43114"
-)
-
-def get_balance():
-    balance = avax.evm.address.balances.get_native(
-        address="0x71C7656EC7ab88b098defB751B7401B5f6d8976F",
-        block_tag="latest",
-        currency="usd"
-    )
-    print(balance)
-
-if __name__ == "__main__":
-    get_balance()`}
-                    </pre>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="absolute right-2 top-2"
-                      onClick={() => copyToClipboard(`from avalanche_sdk import AvalancheSDK
-
-avax = AvalancheSDK(
-    server_url="https://api.avax.network",
-    chain_id="43114"
-)
-
-def get_balance():
-    balance = avax.evm.address.balances.get_native(
-        address="0x71C7656EC7ab88b098defB751B7401B5f6d8976F",
-        block_tag="latest",
-        currency="usd"
-    )
-    print(balance)
-
-if __name__ == "__main__":
-    get_balance()`)}
-                    >
-                      <Copy className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </TabsContent>
-            <TabsContent value="go" className="p-4">
-              <div className="space-y-4">
-                <div>
-                  <p className="mb-2 text-sm text-muted-foreground">First, initialize a Go module and install the Avalanche SDK.</p>
-                  <div className="relative">
-                    <pre className="rounded-lg bg-muted p-4 font-mono text-sm">
-                      go get github.com/ava-labs/avalanchego/sdk
-                    </pre>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="absolute right-2 top-2"
-                      onClick={() => copyToClipboard("go get github.com/ava-labs/avalanchego/sdk")}
-                    >
-                      <Copy className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-                <div>
-                  <p className="mb-2 text-sm text-muted-foreground">Create a new Go file with the following code to retrieve the balance.</p>
-                  <div className="relative">
-                    <pre className="rounded-lg bg-muted p-4 font-mono text-sm">
-{`package main
-
-import (
-    "fmt"
-    "log"
-    
-    "github.com/ava-labs/avalanchego/sdk"
-)
-
-func main() {
-    client := sdk.NewClient(
-        "https://api.avax.network",
-        "43114",
-    )
-    
-    balance, err := client.EVM.Address.Balances.GetNative(sdk.BalanceRequest{
-        Address:  "0x71C7656EC7ab88b098defB751B7401B5f6d8976F",
-        BlockTag: "latest",
-        Currency: "usd",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    
-    fmt.Printf("Balance: %+v\\n", balance)
-}`}
-                    </pre>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="absolute right-2 top-2"
-                      onClick={() => copyToClipboard(`package main
-
-import (
-    "fmt"
-    "log"
-    
-    "github.com/ava-labs/avalanchego/sdk"
-)
-
-func main() {
-    client := sdk.NewClient(
-        "https://api.avax.network",
-        "43114",
-    )
-    
-    balance, err := client.EVM.Address.Balances.GetNative(sdk.BalanceRequest{
-        Address:  "0x71C7656EC7ab88b098defB751B7401B5f6d8976F",
-        BlockTag: "latest",
-        Currency: "usd",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    
-    fmt.Printf("Balance: %+v\\n", balance)
-}`)}
-                    >
-                      <Copy className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </TabsContent>
-            <TabsContent value="curl" className="p-4">
-              <div className="space-y-4">
-                <div>
-                  <p className="mb-2 text-sm text-muted-foreground">Use curl to directly interact with the API endpoints. Remember to replace YOUR_API_KEY with your actual API key.</p>
-                  <div className="relative">
-                    <pre className="rounded-lg bg-muted p-4 font-mono text-sm">
-{`curl -X GET "https://api.avax.network/v1/addresses/0x71C7656EC7ab88b098defB751B7401B5f6d8976F/balances" \\
+      <CodeExampleTabs
+        title="Sample Code"
+        subtitle="Helpful code snippets to get started"
+        examples={{
+          javascript: {
+            title: "Javascript SDK",
+            install: "npm install @avalanche-sdk/sdk",
+            installDescription: "First, initialize a Node.js project, then install the Avalanche SDK.",
+            code: DATA_API_CODE_EXAMPLES.javascript.code,
+            description: "Add the following code to a JavaScript file in your project. Execute it in your terminal with 'node yourFile.js' to retrieve the balance.",
+            language: 'javascript'
+          },
+          python: {
+            title: "Python SDK",
+            install: "pip install avalanche-sdk-python",
+            installDescription: "First, install the Avalanche SDK using pip.",
+            code: DATA_API_CODE_EXAMPLES.python.code,
+            description: "Add the following code to a Python file and run it to retrieve the balance.",
+            language: 'python'
+          },
+          go: {
+            title: "Go SDK",
+            install: "go get github.com/ava-labs/avalanchego/sdk",
+            installDescription: "First, initialize a Go module and install the Avalanche SDK.",
+            code: DATA_API_CODE_EXAMPLES.go.code,
+            description: "Create a new Go file with the following code to retrieve the balance.",
+            language: 'go'
+          },
+          curl: {
+            title: "Curl",
+            code: `curl -X GET "https://api.avax.network/v1/addresses/0x71C7656EC7ab88b098defB751B7401B5f6d8976F/balances" \\
   -H "X-API-Key: YOUR_API_KEY" \\
-  -H "Accept: application/json"`}
-                    </pre>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="absolute right-2 top-2"
-                      onClick={() => copyToClipboard(`curl -X GET "https://api.avax.network/v1/addresses/0x71C7656EC7ab88b098defB751B7401B5f6d8976F/balances" \\
-  -H "X-API-Key: YOUR_API_KEY" \\
-  -H "Accept: application/json"`)}
-                    >
-                      <Copy className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </TabsContent>
-          </Tabs>
-        </div>
-      </div>
+  -H "Accept: application/json"`,
+            description: "Use curl to directly interact with the API endpoints. Remember to replace YOUR_API_KEY with your actual API key.",
+            language: 'bash'
+          }
+        }}
+        defaultTab="javascript"
+      />
 
       {/* Starter Projects */}
       <div className="space-y-4">

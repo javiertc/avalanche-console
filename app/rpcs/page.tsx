@@ -12,6 +12,7 @@ import { RPCSlider } from "@/components/ui/rpc-slider"
 import { ErrorBoundary } from "@/components/ui/error-boundary"
 import { useLoading } from "@/hooks/useLoading"
 import { enhancedToast } from "@/components/ui/enhanced-toast"
+import { copyToClipboard } from "@/lib/utils"
 
 const endpoints = [
   {
@@ -107,13 +108,7 @@ export default function RPCsPage() {
   
   const { isLoading, withLoading } = useLoading()
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
-    enhancedToast.success({
-      title: "Copied to clipboard",
-      description: "The content has been copied to your clipboard.",
-    })
-  }
+
 
   const executeRPCCall = async () => {
     if (!selectedMethod) {

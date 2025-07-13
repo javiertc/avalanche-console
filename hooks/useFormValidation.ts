@@ -1,11 +1,14 @@
 import { useState, useCallback } from 'react'
 
-interface ValidationRule {
+// Define common field value types
+type FieldValue = string | number | boolean | Date | null | undefined;
+
+interface ValidationRule<T = FieldValue> {
   required?: boolean
   minLength?: number
   maxLength?: number
   pattern?: RegExp
-  custom?: (value: any) => string | null
+  custom?: (value: T) => string | null
 }
 
 interface ValidationRules {
@@ -18,8 +21,8 @@ interface FormErrors {
 
 interface UseFormValidationReturn {
   errors: FormErrors
-  validate: (field: string, value: any) => string | null
-  validateAll: (values: Record<string, any>) => boolean
+  validate: (field: string, value: FieldValue) => string | null
+  validateAll: (values: Record<string, FieldValue>) => boolean
   clearError: (field: string) => void
   clearAllErrors: () => void
 }
@@ -27,7 +30,7 @@ interface UseFormValidationReturn {
 export function useFormValidation(rules: ValidationRules): UseFormValidationReturn {
   const [errors, setErrors] = useState<FormErrors>({})
 
-  const validate = useCallback((field: string, value: any): string | null => {
+  const validate = useCallback((field: string, value: FieldValue): string | null => {
     const rule = rules[field]
     if (!rule) return null
 
@@ -64,13 +67,13 @@ export function useFormValidation(rules: ValidationRules): UseFormValidationRetu
     return null
   }, [rules])
 
-  const validateField = useCallback((field: string, value: any) => {
+  const validateField = useCallback((field: string, value: FieldValue) => {
     const error = validate(field, value)
     setErrors(prev => ({ ...prev, [field]: error }))
     return error
   }, [validate])
 
-  const validateAll = useCallback((values: Record<string, any>): boolean => {
+  const validateAll = useCallback((values: Record<string, FieldValue>): boolean => {
     const newErrors: FormErrors = {}
     let hasErrors = false
 

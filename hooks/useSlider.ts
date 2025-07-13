@@ -10,6 +10,7 @@ interface UseSliderReturn {
   currentIndex: number
   isAutoPlaying: boolean
   isVisible: boolean
+  isClosing: boolean
   goToNext: () => void
   goToPrevious: () => void
   goToSlide: (index: number) => void
@@ -31,6 +32,7 @@ export function useSlider({
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(autoPlayEnabled)
   const [isVisible, setIsVisible] = useState(true)
+  const [isClosing, setIsClosing] = useState(false)
 
   // Auto-advance slider with proper cleanup
   useEffect(() => {
@@ -62,8 +64,18 @@ export function useSlider({
   }, [itemsLength])
 
   const handleClose = useCallback(() => {
-    setIsVisible(false)
+    // trigger collapse animation first
+    setIsClosing(true)
   }, [])
+
+  // when closing begin, wait 500ms before actually hiding
+  useEffect(() => {
+    if (!isClosing) return
+    const timer = setTimeout(() => {
+      setIsVisible(false)
+    }, 500)
+    return () => clearTimeout(timer)
+  }, [isClosing])
 
   const handleMouseEnter = useCallback(() => {
     setIsAutoPlaying(false)
@@ -72,6 +84,19 @@ export function useSlider({
   const handleMouseLeave = useCallback(() => {
     setIsAutoPlaying(autoPlayEnabled)
   }, [autoPlayEnabled])
+
+  // Pause autoplay when document/tab hidden to save resources
+  useEffect(() => {
+    const handleVisibility = () => {
+      if (document.hidden) {
+        setIsAutoPlaying(false)
+      } else if (autoPlayEnabled && !isClosing) {
+        setIsAutoPlaying(true)
+      }
+    }
+    document.addEventListener('visibilitychange', handleVisibility)
+    return () => document.removeEventListener('visibilitychange', handleVisibility)
+  }, [autoPlayEnabled, isClosing])
 
   // Memoize the transform style to avoid recalculation
   const sliderTransformStyle = useMemo(() => ({
@@ -82,6 +107,7 @@ export function useSlider({
     currentIndex,
     isAutoPlaying,
     isVisible,
+    isClosing,
     goToNext,
     goToPrevious,
     goToSlide,

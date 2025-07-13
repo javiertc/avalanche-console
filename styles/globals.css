@@ -92,3 +92,57 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Syntax Highlighting Enhancements */
+.syntax-highlighter-wrapper {
+  @apply rounded-lg overflow-hidden;
+}
+
+/* Override react-syntax-highlighter styles for better integration */
+.syntax-highlighter-wrapper pre {
+  @apply !bg-muted dark:!bg-muted/50 !m-0;
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
+}
+
+.syntax-highlighter-wrapper pre::-webkit-scrollbar {
+  @apply h-2;
+}
+
+.syntax-highlighter-wrapper pre::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+.syntax-highlighter-wrapper pre::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full;
+}
+
+.syntax-highlighter-wrapper pre::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/40;
+}
+
+/* Additional token colors for better visibility */
+.dark .syntax-highlighter-wrapper {
+  --prism-keyword: #c792ea;
+  --prism-string: #c3e88d;
+  --prism-function: #82aaff;
+  --prism-number: #f78c6c;
+  --prism-comment: #676e95;
+  --prism-operator: #89ddff;
+  --prism-class: #ffcb6b;
+}
+
+.light .syntax-highlighter-wrapper {
+  --prism-keyword: #7c4dff;
+  --prism-string: #328232;
+  --prism-function: #2196f3;
+  --prism-number: #e65100;
+  --prism-comment: #757575;
+  --prism-operator: #00acc1;
+  --prism-class: #f57c00;
+}
+
+/* Smooth transitions for theme changes */
+.syntax-highlighter-wrapper * {
+  @apply transition-colors duration-200;
+}
