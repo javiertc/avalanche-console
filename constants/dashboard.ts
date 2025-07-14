@@ -12,9 +12,9 @@ export { navigationItems } from "./navigation";
 export const quickActions: QuickAction[] = [
   {
     title: "Get API Keys",
-    description: "Create and manage your API keys for Data API access",
+    description: "Create and manage your API keys for accessing Avalanche services",
     icon: Code,
-    href: "/data-api",
+    href: "/api-keys",
   },
   {
     title: "Request Testnet Funds",

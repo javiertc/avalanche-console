@@ -1,44 +1,23 @@
 "use client"
 
-import { useState } from "react"
-import { Copy, ExternalLink, Wallet, BarChart3, Factory, Eye, Palette, Download } from "lucide-react"
+import { ExternalLink, Wallet, BarChart3, Factory, Eye, Palette, Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Card } from "@/components/ui/card"
 import { ResponsiveContainer } from "@/components/ui/responsive-container"
 import { ErrorBoundary } from "@/components/ui/error-boundary"
 import { DataAPISlider } from "@/components/ui/data-api-slider"
-import { copyToClipboard } from '@/lib/utils'
-import { CopyButton, CodeSnippet, CodeExampleTabs, codeExamplePresets } from '@/components/common'
+import { CodeExampleTabs } from '@/components/common'
 import { DATA_API_CODE_EXAMPLES } from '@/constants/code-examples'
-
-const apiKeys = [
-  {
-    key: "my-key (****mGmE)",
-    requests: "234234234",
-    created: "13 days ago",
-  },
-  {
-    key: "my-dev (****mGmE)",
-    requests: "234234234",
-    created: "Today",
-  },
-]
 
 const starterProjects = [
   {
     title: "Demo Wallet",
-    description: "A simple multichain wallet that pulls balances and token holdings from Avalanche&apos;s Data API.",
+    description: "A simple multichain wallet that pulls balances and token holdings from Avalanche's Data API.",
     icon: Wallet,
   },
   {
     title: "Transaction Report Application",
-    description: "Generates detailed AVAX and token-transfer reports for any address by using the Data API&apos;s transactions and transfers endpoints.",
+    description: "Generates detailed AVAX and token-transfer reports for any address by using the Data API's transactions and transfers endpoints.",
     icon: BarChart3,
   },
   {
@@ -53,7 +32,7 @@ const starterProjects = [
   },
   {
     title: "NFT Deployment",
-    description: "Deploy ERC-721 &amp; ERC-1155 contracts to Fuji, upload metadata to Pinata IPFS, and auto-index them with the Data API NFT endpoints.",
+    description: "Deploy ERC-721 & ERC-1155 contracts to Fuji, upload metadata to Pinata IPFS, and auto-index them with the Data API NFT endpoints.",
     icon: Palette,
   },
   {
@@ -64,10 +43,6 @@ const starterProjects = [
 ]
 
 export default function DataAPIPage() {
-  const [showCreateModal, setShowCreateModal] = useState(false)
-  const [keyName, setKeyName] = useState("")
-  const [activeSDK, setActiveSDK] = useState("javascript")
-
   return (
     <ResponsiveContainer>
       {/* API Features Slider */}
@@ -81,51 +56,6 @@ export default function DataAPIPage() {
         <ErrorBoundary>
           <DataAPISlider />
         </ErrorBoundary>
-      </div>
-
-      <div className="flex items-center justify-between space-y-2">
-        <div>
-          <h2 className="text-lg font-medium">API Keys</h2>
-          <p className="text-sm text-muted-foreground">
-            Manage your API keys below and see our API docs to get started
-          </p>
-        </div>
-        <div className="flex items-center space-x-2">
-          <Button onClick={() => setShowCreateModal(true)}>
-            New Key
-          </Button>
-        </div>
-      </div>
-
-      {/* API Keys Table */}
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            <TableRow className="hover:bg-transparent">
-              <TableHead className="w-[40%] font-medium">Key</TableHead>
-              <TableHead className="w-[30%] font-medium">Request (24h)</TableHead>
-              <TableHead className="w-[20%] font-medium">Created</TableHead>
-              <TableHead className="w-[10%]"></TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {apiKeys.map((key, index) => (
-              <TableRow key={index} className="hover:bg-muted/50">
-                <TableCell className="font-mono">{key.key}</TableCell>
-                <TableCell>{key.requests}</TableCell>
-                <TableCell>{key.created}</TableCell>
-                <TableCell className="text-right">
-                  <CopyButton 
-                    text={key.key} 
-                    variant="ghost" 
-                    size="icon"
-                    successMessage="API key copied!"
-                  />
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
       </div>
 
       {/* Sample Code */}
@@ -194,35 +124,6 @@ export default function DataAPIPage() {
           ))}
         </div>
       </div>
-
-      {/* Create API Key Modal */}
-      <Dialog open={showCreateModal} onOpenChange={setShowCreateModal}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Create API Key</DialogTitle>
-          </DialogHeader>
-          <div className="py-6">
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label>Key Name</Label>
-                <Input
-                  value={keyName}
-                  onChange={(e) => setKeyName(e.target.value)}
-                  placeholder="e.g., Production Key"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="flex justify-end space-x-2">
-            <Button variant="outline" onClick={() => setShowCreateModal(false)}>
-              Cancel
-            </Button>
-            <Button>
-              Create Key
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
     </ResponsiveContainer>
   )
 }

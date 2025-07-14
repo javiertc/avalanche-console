@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/35</span>
+                <span class='fraction'>0/32</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/15</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/35</span>
+                <span class='fraction'>0/32</span>
             </div>
         
             
@@ -532,20 +532,14 @@
 <a name='L467'></a><a href='#L467'>467</a>
 <a name='L468'></a><a href='#L468'>468</a>
 <a name='L469'></a><a href='#L469'>469</a>
-<a name='L470'></a><a href='#L470'>470</a>
-<a name='L471'></a><a href='#L471'>471</a>
-<a name='L472'></a><a href='#L472'>472</a>
-<a name='L473'></a><a href='#L473'>473</a>
-<a name='L474'></a><a href='#L474'>474</a>
-<a name='L475'></a><a href='#L475'>475</a>
-<a name='L476'></a><a href='#L476'>476</a>
-<a name='L477'></a><a href='#L477'>477</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L470'></a><a href='#L470'>470</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -605,14 +599,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1022,7 +1008,7 @@ import { Copy, ExternalLink, Wallet, BarChart3, Factory, Eye, Palette, Download 
 import { Button } from <span class="cstat-no" title="statement not covered" >"@/components/ui/button"</span>
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from <span class="cstat-no" title="statement not covered" >"@/components/ui/table"</span>
 import { Tabs, TabsContent, TabsList, TabsTrigger } from <span class="cstat-no" title="statement not covered" >"@/components/ui/tabs"</span>
-import { toast } from <span class="cstat-no" title="statement not covered" >"@/hooks/use-toast"</span>
+import { toast } from "@/hooks/use-toast"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from <span class="cstat-no" title="statement not covered" >"@/components/ui/dialog"</span>
 import { Input } from <span class="cstat-no" title="statement not covered" >"@/components/ui/input"</span>
 import { Label } from <span class="cstat-no" title="statement not covered" >"@/components/ui/label"</span>
@@ -1030,6 +1016,7 @@ import { Card } from <span class="cstat-no" title="statement not covered" >"@/co
 import { ResponsiveContainer } from <span class="cstat-no" title="statement not covered" >"@/components/ui/responsive-container"</span>
 import { ErrorBoundary } from <span class="cstat-no" title="statement not covered" >"@/components/ui/error-boundary"</span>
 import { DataAPISlider } from <span class="cstat-no" title="statement not covered" >"@/components/ui/data-api-slider"</span>
+import { copyToClipboard } from <span class="cstat-no" title="statement not covered" >'@/lib/utils'</span>
 &nbsp;
 const apiKeys = <span class="cstat-no" title="statement not covered" >[</span>
   {
@@ -1081,14 +1068,6 @@ export default function <span class="cstat-no" title="statement not covered" ><s
   const [showCreateModal, setShowCreateModal] = <span class="cstat-no" title="statement not covered" >useState(false)</span>
   const [keyName, setKeyName] = <span class="cstat-no" title="statement not covered" >useState("")</span>
   const [activeSDK, setActiveSDK] = <span class="cstat-no" title="statement not covered" >useState("javascript")</span>
-&nbsp;
-  const copyToClipboard = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(t</span>ext: string) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    navigator.clipboard.writeText(text)</span>
-<span class="cstat-no" title="statement not covered" >    toast({</span>
-      title: "Copied to clipboard",
-      description: "The content has been copied to your clipboard.",
-    })
-  }
 &nbsp;
   return (
     &lt;ResponsiveContainer&gt;
@@ -1498,7 +1477,7 @@ func main() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-12T02:08:02.343Z
+                at 2025-07-12T02:48:05.761Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

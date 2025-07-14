@@ -1,5 +1,6 @@
 import {
   Home,
+  Key,
   Database,
   Webhook,
   BarChart3,
@@ -11,6 +12,7 @@ import {
 
 export const navigationItems = [
   { name: "Home", href: "/", icon: Home },
+  { name: "API Keys", href: "/api-keys", icon: Key },
   { name: "Data API", href: "/data-api", icon: Database },
   { name: "Webhooks API", href: "/webhooks-api", icon: Webhook },
   { name: "Metrics API", href: "/metrics-api", icon: BarChart3 },

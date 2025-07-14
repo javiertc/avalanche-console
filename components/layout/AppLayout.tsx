@@ -11,6 +11,7 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarTrigger,
+  SidebarSeparator,
 } from "@/components/ui/sidebar";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { usePathname } from 'next/navigation';
@@ -49,7 +50,7 @@ export const AppLayout = memo(function AppLayout({ children }: AppLayoutProps) {
 
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen bg-background">
+      <div className="flex min-h-screen bg-background w-full">
         {/* Mobile Header */}
         <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 bg-background/80 backdrop-blur-sm border-b border-border md:hidden">
           <SidebarTrigger className="hover:bg-accent" />
@@ -70,28 +71,34 @@ export const AppLayout = memo(function AppLayout({ children }: AppLayoutProps) {
           </SidebarHeader>
           <SidebarContent className="px-4 py-4">
             <SidebarMenu className="space-y-1">
-              {navigationItemsWithActiveState.map((item) => {
+              {navigationItemsWithActiveState.map((item, index) => {
                 return (
-                  <SidebarMenuItem key={item.name}>
-                    <SidebarMenuButton
-                      asChild
-                      className={cn(
-                        "w-full transition-all duration-200 ease-in-out px-3 py-2 rounded-md hover:bg-accent",
-                        item.isActive && "bg-accent text-accent-foreground"
-                      )}
-                    >
-                      <Link 
-                        href={item.href}
+                  <React.Fragment key={item.name}>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton
+                        asChild
                         className={cn(
-                          "flex items-center gap-3 px-2 py-1.5 rounded-md w-full text-label-14 text-muted-foreground hover:text-foreground transition-colors",
-                          item.isActive && "text-foreground font-medium"
+                          "w-full transition-all duration-200 ease-in-out px-3 py-2 rounded-md hover:bg-accent",
+                          item.isActive && "bg-accent text-accent-foreground"
                         )}
                       >
-                        <item.icon className="h-4 w-4" />
-                        <span>{item.name}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
+                        <Link 
+                          href={item.href}
+                          className={cn(
+                            "flex items-center gap-3 px-2 py-1.5 rounded-md w-full text-label-14 text-muted-foreground hover:text-foreground transition-colors",
+                            item.isActive && "text-foreground font-medium"
+                          )}
+                        >
+                          <item.icon className="h-4 w-4" />
+                          <span>{item.name}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    {/* Add separator after API Keys */}
+                    {item.name === "API Keys" && (
+                      <SidebarSeparator className="my-2" />
+                    )}
+                  </React.Fragment>
                 );
               })}
             </SidebarMenu>
@@ -143,12 +150,12 @@ export const AppLayout = memo(function AppLayout({ children }: AppLayoutProps) {
           </SidebarFooter>
         </Sidebar>
 
-        <div className="flex-1 flex flex-col min-w-0">
+        <div className="flex-1 flex flex-col min-w-0 w-full">
           <div className="flex justify-end items-center px-6 py-4 border-b border-border">
             <ThemeToggle />
           </div>
-          <div className="flex-1 flex flex-col">
-            <div className="flex-1">
+          <div className="flex-1 flex flex-col w-full">
+            <div className="flex-1 w-full">
               {children}
             </div>
           </div>

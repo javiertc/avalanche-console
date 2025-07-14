@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -82,30 +82,30 @@
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { NextResponse } from <span class="cstat-no" title="statement not covered" >'next/server';</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { NextResponse } from 'next/server';
 import type { ApiUsageData } from '@/types/analytics';
 &nbsp;
 // This would typically come from your database or analytics service
-const mockApiUsageData: ApiUsageData[] = <span class="cstat-no" title="statement not covered" >[</span>
+const mockApiUsageData: ApiUsageData[] = [
   { date: "Dec 18", dataApi: 1200, rpc: 800, webhooks: 45, total: 2045 },
   { date: "Dec 19", dataApi: 1800, rpc: 1200, webhooks: 62, total: 3062 },
   { date: "Dec 20", dataApi: 1600, rpc: 950, webhooks: 38, total: 2588 },
@@ -115,11 +115,11 @@ const mockApiUsageData: ApiUsageData[] = <span class="cstat-no" title="statement
   { date: "Dec 24", dataApi: 2100, rpc: 1300, webhooks: 67, total: 3467 },
 ];
 &nbsp;
-export async function <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >GET() {</span></span>
+export async function GET() {
   // Add artificial delay to simulate real API latency
-<span class="cstat-no" title="statement not covered" >  await new Promise(<span class="fstat-no" title="function not covered" >resolve =&gt; <span class="cstat-no" title="statement not covered" >s</span>etTimeout(resolve, 500));</span></span>
+  await new Promise(resolve =&gt; setTimeout(resolve, 500));
   
-<span class="cstat-no" title="statement not covered" >  return NextResponse.json(mockApiUsageData);</span>
+  return NextResponse.json(mockApiUsageData);
 } </pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -127,7 +127,7 @@ export async function <span class="cstat-no" title="statement not covered" ><spa
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-12T02:08:02.343Z
+                at 2025-07-12T02:48:05.761Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

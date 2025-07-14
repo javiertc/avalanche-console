@@ -54,20 +54,16 @@
     --sidebar-border: 0 0% 90%;
     --sidebar-ring: 0 0% 9%;
     
-    /* Status Colors */
+    /* Success & Error Colors */
     --success: 142 76% 36%;
     --success-foreground: 0 0% 98%;
-    --warning: 32 95% 44%;
-    --warning-foreground: 0 0% 98%;
-    --info: 221 83% 53%;
-    --info-foreground: 0 0% 98%;
     
     /* Chart Colors */
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
   }
 
   .dark {
@@ -75,23 +71,23 @@
     --background: 0 0% 4%;
     --foreground: 0 0% 98%;
     
-    /* Gray Scale - Dark Mode (50 = lightest in dark, 950 = darkest in dark) */
-    --gray-50: 0 0% 9%;
-    --gray-100: 0 0% 15%;
-    --gray-200: 0 0% 20%;
+    /* Gray Scale - Dark Mode */
+    --gray-50: 0 0% 4%;
+    --gray-100: 0 0% 9%;
+    --gray-200: 0 0% 15%;
     --gray-300: 0 0% 25%;
     --gray-400: 0 0% 32%;
     --gray-500: 0 0% 45%;
     --gray-600: 0 0% 64%;
-    --gray-700: 0 0% 71%;
-    --gray-800: 0 0% 83%;
-    --gray-900: 0 0% 90%;
-    --gray-950: 0 0% 96%;
+    --gray-700: 0 0% 83%;
+    --gray-800: 0 0% 90%;
+    --gray-900: 0 0% 96%;
+    --gray-950: 0 0% 98%;
     
-    /* Component Colors - Dark Mode */
-    --card: 0 0% 6%;
+    /* Component Colors */
+    --card: 0 0% 9%;
     --card-foreground: 0 0% 98%;
-    --popover: 0 0% 4%;
+    --popover: 0 0% 9%;
     --popover-foreground: 0 0% 98%;
     --primary: 0 0% 98%;
     --primary-foreground: 0 0% 9%;
@@ -101,14 +97,14 @@
     --muted-foreground: 0 0% 64%;
     --accent: 0 0% 15%;
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 63% 31%;
+    --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 15%;
     --input: 0 0% 15%;
     --ring: 0 0% 83%;
     
-    /* Sidebar Colors - Dark Mode */
-    --sidebar-background: 0 0% 4%;
+    /* Sidebar Colors */
+    --sidebar-background: 0 0% 9%;
     --sidebar-foreground: 0 0% 98%;
     --sidebar-primary: 0 0% 98%;
     --sidebar-primary-foreground: 0 0% 9%;
@@ -117,20 +113,28 @@
     --sidebar-border: 0 0% 15%;
     --sidebar-ring: 0 0% 83%;
     
-    /* Chart Colors remain the same */
+    /* Success & Error Colors */
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 9%;
+    
+    /* Chart Colors */
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
-}
+  
+  /* Ensure full width */
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+  }
 
-@layer base {
   * {
     @apply border-border;
   }
-  
+
   body {
     @apply bg-background text-foreground font-inter;
     font-feature-settings: 'rlig' 1, 'calt' 1;

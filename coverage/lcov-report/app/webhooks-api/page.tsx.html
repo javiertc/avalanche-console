@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/53</span>
+                <span class='fraction'>0/50</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>0/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/52</span>
+                <span class='fraction'>0/49</span>
             </div>
         
             
@@ -626,13 +626,7 @@
 <a name='L561'></a><a href='#L561'>561</a>
 <a name='L562'></a><a href='#L562'>562</a>
 <a name='L563'></a><a href='#L563'>563</a>
-<a name='L564'></a><a href='#L564'>564</a>
-<a name='L565'></a><a href='#L565'>565</a>
-<a name='L566'></a><a href='#L566'>566</a>
-<a name='L567'></a><a href='#L567'>567</a>
-<a name='L568'></a><a href='#L568'>568</a>
-<a name='L569'></a><a href='#L569'>569</a>
-<a name='L570'></a><a href='#L570'>570</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L564'></a><a href='#L564'>564</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -647,10 +641,12 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -758,14 +754,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1216,10 +1204,12 @@ import { Checkbox } from <span class="cstat-no" title="statement not covered" >"
 import { Badge } from <span class="cstat-no" title="statement not covered" >"@/components/ui/badge"</span>
 import { Switch } from <span class="cstat-no" title="statement not covered" >"@/components/ui/switch"</span>
 import { RadioGroup, RadioGroupItem } from <span class="cstat-no" title="statement not covered" >"@/components/ui/radio-group"</span>
-import { toast } from <span class="cstat-no" title="statement not covered" >"@/hooks/use-toast"</span>
+import { toast } from "@/hooks/use-toast"
 import { WebhooksAPISlider } from <span class="cstat-no" title="statement not covered" >"@/components/ui/webhooks-api-slider"</span>
 import { ResponsiveContainer } from <span class="cstat-no" title="statement not covered" >"@/components/ui/responsive-container"</span>
 import { ResponsiveTable } from <span class="cstat-no" title="statement not covered" >"@/components/ui/responsive-table"</span>
+import { copyToClipboard } from <span class="cstat-no" title="statement not covered" >'@/lib/utils'</span>
+import type { Webhook, DeliveryLog } from '@/types/webhooks'
 &nbsp;
 const chains = <span class="cstat-no" title="statement not covered" >[</span>
   { value: "43114", label: "Avalanche C-Chain (Mainnet)" },
@@ -1236,7 +1226,7 @@ const eventTypes = <span class="cstat-no" title="statement not covered" >[</span
   { value: "nft_transfer", label: "NFT Transfer" },
 ]
 &nbsp;
-const initialWebhooks = <span class="cstat-no" title="statement not covered" >[</span>
+const initialWebhooks: Webhook[] = <span class="cstat-no" title="statement not covered" >[</span>
   {
     id: "1",
     name: "Transaction Monitor",
@@ -1284,7 +1274,7 @@ const initialWebhooks = <span class="cstat-no" title="statement not covered" >[<
   },
 ]
 &nbsp;
-const deliveryLogs = <span class="cstat-no" title="statement not covered" >[</span>
+const deliveryLogs: DeliveryLog[] = <span class="cstat-no" title="statement not covered" >[</span>
   {
     id: "1",
     webhook: "Transaction Monitor",
@@ -1327,14 +1317,6 @@ export default function <span class="cstat-no" title="statement not covered" ><s
   const [webhookName, setWebhookName] = <span class="cstat-no" title="statement not covered" >useState("")</span>
   const [includeInternalTx, setIncludeInternalTx] = <span class="cstat-no" title="statement not covered" >useState(false)</span>
   const [includeLogs, setIncludeLogs] = <span class="cstat-no" title="statement not covered" >useState(false)</span>
-&nbsp;
-  const copyToClipboard = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(t</span>ext: string) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    navigator.clipboard.writeText(text)</span>
-<span class="cstat-no" title="statement not covered" >    toast({</span>
-      title: "Copied to clipboard",
-      description: "The URL has been copied to your clipboard.",
-    })
-  }
 &nbsp;
   const getStatusIcon = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(s</span>tatus: string) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    switch (status) {</span>
@@ -1777,7 +1759,7 @@ export default function <span class="cstat-no" title="statement not covered" ><s
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-12T02:08:02.343Z
+                at 2025-07-12T02:48:05.761Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

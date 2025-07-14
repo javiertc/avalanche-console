@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1752286082416" clover="3.2.0">
-  <project timestamp="1752286082417" name="All files">
-    <metrics statements="2013" coveredstatements="247" conditionals="768" coveredconditionals="100" methods="494" coveredmethods="65" elements="3275" coveredelements="412" complexity="0" loc="2013" ncloc="2013" packages="20" files="120" classes="120"/>
+<coverage generated="1752288485821" clover="3.2.0">
+  <project timestamp="1752288485821" name="All files">
+    <metrics statements="2011" coveredstatements="268" conditionals="768" coveredconditionals="100" methods="493" coveredmethods="69" elements="3272" coveredelements="437" complexity="0" loc="2011" ncloc="2011" packages="20" files="120" classes="120"/>
     <package name="app">
       <metrics statements="23" coveredstatements="0" conditionals="9" coveredconditionals="0" methods="7" coveredmethods="0"/>
       <file name="layout.tsx" path="/Users/javier.toledo/Documents/projects/avalanche-console/app/layout.tsx">
@@ -38,29 +38,29 @@
       </file>
     </package>
     <package name="app.api.analytics.endpoints">
-      <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
       <file name="route.ts" path="/Users/javier.toledo/Documents/projects/avalanche-console/app/api/analytics/endpoints/route.ts">
-        <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
       </file>
     </package>
     <package name="app.api.analytics.usage">
-      <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
       <file name="route.ts" path="/Users/javier.toledo/Documents/projects/avalanche-console/app/api/analytics/usage/route.ts">
-        <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
       </file>
     </package>
     <package name="app.data-api">
-      <metrics statements="38" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="17" coveredmethods="0"/>
+      <metrics statements="35" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="16" coveredmethods="0"/>
       <file name="loading.tsx" path="/Users/javier.toledo/Documents/projects/avalanche-console/app/data-api/loading.tsx">
         <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
@@ -68,13 +68,12 @@
         <line num="29" count="0" type="stmt"/>
       </file>
       <file name="page.tsx" path="/Users/javier.toledo/Documents/projects/avalanche-console/app/data-api/page.tsx">
-        <metrics statements="35" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="15" coveredmethods="0"/>
+        <metrics statements="32" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="14" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
         <line num="11" count="0" type="stmt"/>
@@ -82,28 +81,26 @@
         <line num="13" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="63" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
         <line num="64" count="0" type="stmt"/>
         <line num="65" count="0" type="stmt"/>
         <line num="66" count="0" type="stmt"/>
-        <line num="68" count="0" type="stmt"/>
-        <line num="69" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="99" count="0" type="stmt"/>
-        <line num="118" count="0" type="stmt"/>
-        <line num="123" count="0" type="stmt"/>
-        <line num="180" count="0" type="stmt"/>
-        <line num="213" count="0" type="stmt"/>
-        <line num="250" count="0" type="stmt"/>
-        <line num="282" count="0" type="stmt"/>
-        <line num="318" count="0" type="stmt"/>
-        <line num="359" count="0" type="stmt"/>
-        <line num="406" count="0" type="stmt"/>
-        <line num="428" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="111" count="0" type="stmt"/>
+        <line num="116" count="0" type="stmt"/>
+        <line num="173" count="0" type="stmt"/>
+        <line num="206" count="0" type="stmt"/>
+        <line num="243" count="0" type="stmt"/>
+        <line num="275" count="0" type="stmt"/>
+        <line num="311" count="0" type="stmt"/>
+        <line num="352" count="0" type="stmt"/>
+        <line num="399" count="0" type="stmt"/>
+        <line num="421" count="0" type="stmt"/>
+        <line num="451" count="0" type="stmt"/>
         <line num="458" count="0" type="stmt"/>
-        <line num="465" count="0" type="stmt"/>
       </file>
     </package>
     <package name="app.faucet">
@@ -263,7 +260,7 @@
       </file>
     </package>
     <package name="app.webhooks-api">
-      <metrics statements="55" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="20" coveredmethods="0"/>
+      <metrics statements="52" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="19" coveredmethods="0"/>
       <file name="loading.tsx" path="/Users/javier.toledo/Documents/projects/avalanche-console/app/webhooks-api/loading.tsx">
         <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
@@ -271,7 +268,7 @@
         <line num="35" count="0" type="stmt"/>
       </file>
       <file name="page.tsx" path="/Users/javier.toledo/Documents/projects/avalanche-console/app/webhooks-api/page.tsx">
-        <metrics statements="52" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="18" coveredmethods="0"/>
+        <metrics statements="49" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="17" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
@@ -285,45 +282,42 @@
         <line num="13" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="84" count="0" type="stmt"/>
-        <line num="114" count="0" type="stmt"/>
-        <line num="115" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
         <line num="116" count="0" type="stmt"/>
         <line num="117" count="0" type="stmt"/>
         <line num="118" count="0" type="stmt"/>
-        <line num="121" count="0" type="stmt"/>
-        <line num="122" count="0" type="stmt"/>
+        <line num="119" count="0" type="stmt"/>
+        <line num="120" count="0" type="stmt"/>
         <line num="123" count="0" type="stmt"/>
         <line num="124" count="0" type="stmt"/>
         <line num="125" count="0" type="stmt"/>
         <line num="126" count="0" type="stmt"/>
+        <line num="127" count="0" type="stmt"/>
         <line num="128" count="0" type="stmt"/>
-        <line num="129" count="0" type="stmt"/>
         <line num="130" count="0" type="stmt"/>
-        <line num="136" count="0" type="stmt"/>
-        <line num="137" count="0" type="stmt"/>
-        <line num="147" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="172" count="0" type="stmt"/>
-        <line num="177" count="0" type="stmt"/>
-        <line num="234" count="0" type="stmt"/>
-        <line num="269" count="0" type="stmt"/>
-        <line num="297" count="0" type="stmt"/>
-        <line num="355" count="0" type="stmt"/>
-        <line num="427" count="0" type="stmt"/>
-        <line num="445" count="0" type="stmt"/>
-        <line num="460" count="0" type="stmt"/>
-        <line num="472" count="0" type="stmt"/>
-        <line num="495" count="0" type="stmt"/>
-        <line num="515" count="0" type="stmt"/>
-        <line num="533" count="0" type="stmt"/>
-        <line num="558" count="0" type="stmt"/>
+        <line num="131" count="0" type="stmt"/>
+        <line num="141" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="166" count="0" type="stmt"/>
+        <line num="171" count="0" type="stmt"/>
+        <line num="228" count="0" type="stmt"/>
+        <line num="263" count="0" type="stmt"/>
+        <line num="291" count="0" type="stmt"/>
+        <line num="349" count="0" type="stmt"/>
+        <line num="421" count="0" type="stmt"/>
+        <line num="439" count="0" type="stmt"/>
+        <line num="454" count="0" type="stmt"/>
+        <line num="466" count="0" type="stmt"/>
+        <line num="489" count="0" type="stmt"/>
+        <line num="509" count="0" type="stmt"/>
+        <line num="527" count="0" type="stmt"/>
+        <line num="552" count="0" type="stmt"/>
       </file>
     </package>
     <package name="components">
@@ -2056,7 +2050,7 @@
       </file>
     </package>
     <package name="hooks">
-      <metrics statements="233" coveredstatements="87" conditionals="105" coveredconditionals="47" methods="64" coveredmethods="26"/>
+      <metrics statements="233" coveredstatements="97" conditionals="105" coveredconditionals="47" methods="64" coveredmethods="26"/>
       <file name="use-mobile.tsx" path="/Users/javier.toledo/Documents/projects/avalanche-console/hooks/use-mobile.tsx">
         <metrics statements="12" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
@@ -2073,23 +2067,23 @@
         <line num="18" count="0" type="stmt"/>
       </file>
       <file name="use-toast.ts" path="/Users/javier.toledo/Documents/projects/avalanche-console/hooks/use-toast.ts">
-        <metrics statements="53" coveredstatements="0" conditionals="20" coveredconditionals="0" methods="18" coveredmethods="0"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
+        <metrics statements="53" coveredstatements="10" conditionals="20" coveredconditionals="0" methods="18" coveredmethods="0"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="21" count="8" type="stmt"/>
+        <line num="28" count="8" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
-        <line num="59" count="0" type="stmt"/>
-        <line num="61" count="0" type="stmt"/>
+        <line num="59" count="8" type="stmt"/>
+        <line num="61" count="8" type="stmt"/>
         <line num="62" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="63" count="0" type="stmt"/>
         <line num="66" count="0" type="stmt"/>
         <line num="67" count="0" type="stmt"/>
         <line num="68" count="0" type="stmt"/>
         <line num="74" count="0" type="stmt"/>
-        <line num="77" count="0" type="stmt"/>
+        <line num="77" count="8" type="stmt"/>
         <line num="78" count="0" type="cond" truecount="0" falsecount="4"/>
         <line num="80" count="0" type="stmt"/>
         <line num="86" count="0" type="stmt"/>
@@ -2105,8 +2099,8 @@
         <line num="120" count="0" type="stmt"/>
         <line num="125" count="0" type="stmt"/>
         <line num="127" count="0" type="stmt"/>
-        <line num="132" count="0" type="stmt"/>
-        <line num="134" count="0" type="stmt"/>
+        <line num="132" count="8" type="stmt"/>
+        <line num="134" count="8" type="stmt"/>
         <line num="137" count="0" type="stmt"/>
         <line num="138" count="0" type="stmt"/>
         <line num="139" count="0" type="stmt"/>
@@ -2316,7 +2310,7 @@
       </file>
     </package>
     <package name="lib">
-      <metrics statements="96" coveredstatements="53" conditionals="53" coveredconditionals="22" methods="16" coveredmethods="10"/>
+      <metrics statements="100" coveredstatements="54" conditionals="53" coveredconditionals="22" methods="17" coveredmethods="10"/>
       <file name="constants.ts" path="/Users/javier.toledo/Documents/projects/avalanche-console/lib/constants.ts">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="2" count="10" type="stmt"/>
@@ -2403,11 +2397,15 @@
         <line num="46" count="20" type="stmt"/>
       </file>
       <file name="utils.ts" path="/Users/javier.toledo/Documents/projects/avalanche-console/lib/utils.ts">
-        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <metrics statements="8" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="1" count="9" type="stmt"/>
         <line num="2" count="9" type="stmt"/>
-        <line num="4" count="240" type="stmt"/>
+        <line num="3" count="9" type="stmt"/>
         <line num="5" count="240" type="stmt"/>
+        <line num="6" count="240" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
       </file>
       <file name="validation.ts" path="/Users/javier.toledo/Documents/projects/avalanche-console/lib/validation.ts">
         <metrics statements="22" coveredstatements="22" conditionals="10" coveredconditionals="10" methods="5" coveredmethods="5"/>
