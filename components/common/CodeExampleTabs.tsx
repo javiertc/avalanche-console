@@ -114,15 +114,15 @@ export const CodeExampleTabs = memo(function CodeExampleTabs({
       )}
 
       {/* Tabs Container */}
-      <div className="rounded-md border">
+      <div className="rounded-md border overflow-hidden">
         <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
           {/* Tab List with Data API styling */}
-          <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0">
+          <TabsList className="w-full justify-start rounded-none border-b bg-muted/50 p-0">
             {tabs.map((key) => (
               <TabsTrigger
                 key={key}
                 value={key}
-                className="rounded-none border-b-2 border-transparent px-4 py-3 font-medium text-muted-foreground hover:text-foreground data-[state=active]:border-foreground data-[state=active]:text-foreground"
+                className="rounded-none border-b-2 border-transparent px-4 py-3 font-medium text-muted-foreground hover:text-foreground data-[state=active]:bg-background data-[state=active]:border-foreground data-[state=active]:text-foreground data-[state=active]:shadow-none"
               >
                 {examples[key].title}
               </TabsTrigger>
