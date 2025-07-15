@@ -24,7 +24,11 @@ export function Toaster() {
                 <ToastDescription>{description}</ToastDescription>
               )}
             </div>
-            {action}
+            {action && (
+              <button onClick={action.onClick} className="text-sm underline">
+                {action.label}
+              </button>
+            )}
             <ToastClose />
           </Toast>
         )

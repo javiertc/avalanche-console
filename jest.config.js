@@ -13,7 +13,11 @@ const customJestConfig = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
   },
-  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
+  testPathIgnorePatterns: [
+    '<rootDir>/.next/', 
+    '<rootDir>/node_modules/',
+    '<rootDir>/__tests__/utils/'
+  ],
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
@@ -25,6 +29,33 @@ const customJestConfig = {
     '!**/*.d.ts',
     '!**/node_modules/**',
     '!**/.next/**',
+    '!**/coverage/**',
+    '!**/__tests__/**',
+    '!**/jest.config.js',
+    '!**/jest.setup.js',
+    '!**/jest.polyfills.js',
+    '!**/next.config.mjs',
+    '!**/tailwind.config.ts',
+    '!**/postcss.config.mjs',
+    '!**/types/**',
+    '!**/constants/**',
+    '!**/mocks/**',
+    '!**/public/**',
+    '!**/styles/**',
+  ],
+  coverageThreshold: {
+    global: {
+      branches: 70,
+      functions: 70,
+      lines: 70,
+      statements: 70
+    }
+  },
+  coverageReporters: [
+    'text',
+    'lcov',
+    'html',
+    'json-summary'
   ],
 }
 

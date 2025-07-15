@@ -4,7 +4,7 @@ import { ExternalLink, Wallet, BarChart3, Factory, Eye, Palette, Download } from
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ResponsiveContainer } from "@/components/ui/responsive-container"
-import { ErrorBoundary } from "@/components/ui/error-boundary"
+import { SectionErrorBoundary, PageErrorBoundary } from "@/components/ui/error-boundary"
 import { DataAPISlider } from "@/components/ui/data-api-slider"
 import { CodeExampleTabs } from '@/components/common'
 import { DATA_API_CODE_EXAMPLES } from '@/constants/code-examples'
@@ -45,22 +45,26 @@ const starterProjects = [
 
 export default function DataAPIPage() {
   return (
-    <ResponsiveContainer>
-      {/* Page Header */}
-      <div className="space-y-2 mb-6">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Avalanche Data API</h1>
-        <p className="text-copy-16 text-muted-foreground">
-          Powerful blockchain data access with enterprise-grade performance and security
-        </p>
-      </div>
+    <PageErrorBoundary name="DataAPIPage">
+      <ResponsiveContainer>
+        {/* Page Header */}
+        <SectionErrorBoundary name="PageHeader">
+          <div className="space-y-2 mb-6">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Avalanche Data API</h1>
+            <p className="text-copy-16 text-muted-foreground">
+              Powerful blockchain data access with enterprise-grade performance and security
+            </p>
+          </div>
+        </SectionErrorBoundary>
 
-      {/* API Features Slider */}
-      <ErrorBoundary>
-        <DataAPISlider />
-      </ErrorBoundary>
+        {/* API Features Slider */}
+        <SectionErrorBoundary name="DataAPISlider">
+          <DataAPISlider />
+        </SectionErrorBoundary>
 
-      {/* Tabs */}
-      <div className="rounded-md border mt-8 overflow-hidden">
+        {/* Tabs */}
+        <SectionErrorBoundary name="DataAPITabs">
+          <div className="rounded-md border mt-8 overflow-hidden">
         <Tabs defaultValue="get-started" className="w-full">
           <TabsList className="w-full justify-start rounded-none border-b bg-muted/50 p-0">
             <TabsTrigger 
@@ -330,7 +334,9 @@ export default function DataAPIPage() {
             </Card>
           </TabsContent>
         </Tabs>
-      </div>
-    </ResponsiveContainer>
+          </div>
+        </SectionErrorBoundary>
+      </ResponsiveContainer>
+    </PageErrorBoundary>
   )
 }

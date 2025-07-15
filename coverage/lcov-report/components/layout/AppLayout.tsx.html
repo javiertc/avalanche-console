@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -227,7 +227,14 @@
 <a name='L162'></a><a href='#L162'>162</a>
 <a name='L163'></a><a href='#L163'>163</a>
 <a name='L164'></a><a href='#L164'>164</a>
-<a name='L165'></a><a href='#L165'>165</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -240,6 +247,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -256,18 +264,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -280,6 +276,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -301,6 +309,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -404,6 +418,7 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarTrigger,
+  SidebarSeparator,
 } from <span class="cstat-no" title="statement not covered" >"@/components/ui/sidebar";</span>
 import { ThemeToggle } from <span class="cstat-no" title="statement not covered" >"@/components/theme-toggle";</span>
 import { usePathname } from <span class="cstat-no" title="statement not covered" >'next/navigation';</span>
@@ -442,7 +457,7 @@ export const <span class="cstat-no" title="statement not covered" >AppLayout = <
 &nbsp;
   return (
     &lt;SidebarProvider&gt;
-      &lt;div className="flex min-h-screen bg-background"&gt;
+      &lt;div className="flex min-h-screen bg-background w-full"&gt;
         {/* Mobile Header */}
         &lt;div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 bg-background/80 backdrop-blur-sm border-b border-border md:hidden"&gt;
           &lt;SidebarTrigger className="hover:bg-accent" /&gt;
@@ -463,28 +478,34 @@ export const <span class="cstat-no" title="statement not covered" >AppLayout = <
           &lt;/SidebarHeader&gt;
           &lt;SidebarContent className="px-4 py-4"&gt;
             &lt;SidebarMenu className="space-y-1"&gt;
-              {navigationItemsWithActiveState.map(<span class="fstat-no" title="function not covered" >(i</span>tem) =&gt; {
+              {navigationItemsWithActiveState.map(<span class="fstat-no" title="function not covered" >(i</span>tem, index) =&gt; {
 <span class="cstat-no" title="statement not covered" >                return (</span>
-                  &lt;SidebarMenuItem key={item.name}&gt;
-                    &lt;SidebarMenuButton
-                      asChild
-                      className={cn(
-                        "w-full transition-all duration-200 ease-in-out px-3 py-2 rounded-md hover:bg-accent",
-                        item.isActive &amp;&amp; "bg-accent text-accent-foreground"
-                      )}
-                    &gt;
-                      &lt;Link 
-                        href={item.href}
+                  &lt;React.Fragment key={item.name}&gt;
+                    &lt;SidebarMenuItem&gt;
+                      &lt;SidebarMenuButton
+                        asChild
                         className={cn(
-                          "flex items-center gap-3 px-2 py-1.5 rounded-md w-full text-label-14 text-muted-foreground hover:text-foreground transition-colors",
-                          item.isActive &amp;&amp; "text-foreground font-medium"
+                          "w-full transition-all duration-200 ease-in-out px-3 py-2 rounded-md hover:bg-accent",
+                          item.isActive &amp;&amp; "bg-accent text-accent-foreground"
                         )}
                       &gt;
-                        &lt;item.icon className="h-4 w-4" /&gt;
-                        &lt;span&gt;{item.name}&lt;/span&gt;
-                      &lt;/Link&gt;
-                    &lt;/SidebarMenuButton&gt;
-                  &lt;/SidebarMenuItem&gt;
+                        &lt;Link 
+                          href={item.href}
+                          className={cn(
+                            "flex items-center gap-3 px-2 py-1.5 rounded-md w-full text-label-14 text-muted-foreground hover:text-foreground transition-colors",
+                            item.isActive &amp;&amp; "text-foreground font-medium"
+                          )}
+                        &gt;
+                          &lt;item.icon className="h-4 w-4" /&gt;
+                          &lt;span&gt;{item.name}&lt;/span&gt;
+                        &lt;/Link&gt;
+                      &lt;/SidebarMenuButton&gt;
+                    &lt;/SidebarMenuItem&gt;
+                    {/* Add separator after API Keys */}
+                    {<span class="branch-0 cbranch-no" title="branch not covered" >item.name === "API Keys" &amp;&amp; (</span>
+                      &lt;SidebarSeparator className="my-2" /&gt;
+                    )}
+                  &lt;/React.Fragment&gt;
                 );
               })}
             &lt;/SidebarMenu&gt;
@@ -536,12 +557,12 @@ export const <span class="cstat-no" title="statement not covered" >AppLayout = <
           &lt;/SidebarFooter&gt;
         &lt;/Sidebar&gt;
 &nbsp;
-        &lt;div className="flex-1 flex flex-col min-w-0"&gt;
+        &lt;div className="flex-1 flex flex-col min-w-0 w-full"&gt;
           &lt;div className="flex justify-end items-center px-6 py-4 border-b border-border"&gt;
             &lt;ThemeToggle /&gt;
           &lt;/div&gt;
-          &lt;div className="flex-1 flex flex-col"&gt;
-            &lt;div className="flex-1"&gt;
+          &lt;div className="flex-1 flex flex-col w-full"&gt;
+            &lt;div className="flex-1 w-full"&gt;
               {children}
             &lt;/div&gt;
           &lt;/div&gt;
@@ -562,7 +583,7 @@ export const <span class="cstat-no" title="statement not covered" >AppLayout = <
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-12T02:48:05.761Z
+                at 2025-07-15T03:03:42.097Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

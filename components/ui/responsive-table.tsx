@@ -68,7 +68,7 @@ export function ResponsiveTable({
                         {column.label}
                       </span>
                       <span className="text-sm text-foreground">
-                        {column.render ? column.render(row[column.key], row) : row[column.key]}
+                        {column.render ? column.render(row[column.key], row) : String(row[column.key] ?? '')}
                       </span>
                     </div>
                   ))}
@@ -104,7 +104,7 @@ export function ResponsiveTable({
                               {column.label}
                             </span>
                             <span className="text-sm text-foreground">
-                              {column.render ? column.render(row[column.key], row) : row[column.key]}
+                              {column.render ? column.render(row[column.key], row) : String(row[column.key] ?? '')}
                             </span>
                           </div>
                         ))}
@@ -138,7 +138,7 @@ export function ResponsiveTable({
             <TableRow key={index} className="hover:bg-muted/50">
               {columns.map(column => (
                 <TableCell key={column.key}>
-                  {column.render ? column.render(row[column.key], row) : row[column.key]}
+                  {column.render ? column.render(row[column.key], row) : String(row[column.key] ?? '')}
                 </TableCell>
               ))}
             </TableRow>

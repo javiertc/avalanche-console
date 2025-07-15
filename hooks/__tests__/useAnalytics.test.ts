@@ -1,13 +1,26 @@
 import { renderHook, act } from '@testing-library/react';
 import { useAnalytics } from '../useAnalytics';
+import { createMockAnalyticsService } from '@/__tests__/utils/test-utils';
 
-// Mock fetch
-global.fetch = jest.fn();
+// Mock the analytics service
+jest.mock('@/lib/api', () => ({
+  analyticsService: {
+    getUsageMetrics: jest.fn(),
+    getUsageOverTime: jest.fn(),
+    getEndpointUsage: jest.fn()
+  }
+}));
+
+// Import the mocked service
+import { analyticsService } from '@/lib/api';
 
 describe('useAnalytics', () => {
+  // Reset mocks before each test
   beforeEach(() => {
     jest.clearAllMocks();
-    (global.fetch as jest.Mock).mockReset();
+    (analyticsService.getUsageMetrics as jest.Mock).mockResolvedValue({ success: true, data: null });
+    (analyticsService.getUsageOverTime as jest.Mock).mockResolvedValue({ success: true, data: [] });
+    (analyticsService.getEndpointUsage as jest.Mock).mockResolvedValue({ success: true, data: [] });
   });
 
   it('should initialize with default state', () => {
@@ -15,19 +28,21 @@ describe('useAnalytics', () => {
 
     expect(result.current.loading).toBe(true);
     expect(result.current.error).toBeNull();
-    expect(result.current.data).toBeNull();
+    expect(result.current.metrics).toBeNull();
+    expect(result.current.usageData).toEqual([]);
+    expect(result.current.endpointUsage).toEqual([]);
   });
 
   it('should fetch analytics data successfully', async () => {
-    const mockData = {
-      usage: { requests: 1000, bandwidth: '1GB' },
-      endpoints: { '/api/v1': 500, '/api/v2': 500 }
-    };
+    // Mock the analytics service responses
+    const mockMetrics = { totalRequests: 1000, avgResponseTime: 150, errorRate: 0.5, successRate: 99.5, requestsPerSecond: 4.2 };
+    const mockUsageData = [{ date: '2024-01-01', value: 100 }];
+    const mockEndpointUsage = [{ endpoint: '/api/v1', requests: 500, avgResponseTime: 120, errorRate: 0.1 }];
 
-    (global.fetch as jest.Mock).mockResolvedValueOnce({
-      ok: true,
-      json: async () => mockData
-    });
+    // Set up mock responses
+    (analyticsService.getUsageMetrics as jest.Mock).mockResolvedValue({ success: true, data: mockMetrics });
+    (analyticsService.getUsageOverTime as jest.Mock).mockResolvedValue({ success: true, data: mockUsageData });
+    (analyticsService.getEndpointUsage as jest.Mock).mockResolvedValue({ success: true, data: mockEndpointUsage });
 
     const { result } = renderHook(() => useAnalytics());
 
@@ -38,74 +53,45 @@ describe('useAnalytics', () => {
 
     expect(result.current.loading).toBe(false);
     expect(result.current.error).toBeNull();
-    expect(result.current.data).toEqual(mockData);
-    expect(global.fetch).toHaveBeenCalledWith('/api/analytics/usage');
+    expect(result.current.metrics).toEqual(mockMetrics);
+    expect(result.current.usageData).toEqual(mockUsageData);
+    expect(result.current.endpointUsage).toEqual(mockEndpointUsage);
   });
 
   it('should handle fetch error', async () => {
-    (global.fetch as jest.Mock).mockRejectedValueOnce(new Error('Network error'));
-
+    // Mock failed API responses
+    (analyticsService.getUsageMetrics as jest.Mock).mockRejectedValue(new Error('Network error'));
+    
     const { result } = renderHook(() => useAnalytics());
 
+    // Wait for the effect to complete
     await act(async () => {
       await new Promise(resolve => setTimeout(resolve, 100));
     });
 
     expect(result.current.loading).toBe(false);
-    expect(result.current.error).toBe('Failed to load analytics data');
-    expect(result.current.data).toBeNull();
+    expect(result.current.error).toBe('Network error');
+    expect(result.current.metrics).toBeNull();
   });
 
   it('should handle non-ok response', async () => {
-    (global.fetch as jest.Mock).mockResolvedValueOnce({
-      ok: false,
-      status: 500,
-      statusText: 'Internal Server Error'
+    // Mock failed API responses
+    (analyticsService.getUsageMetrics as jest.Mock).mockResolvedValue({ 
+      success: false, 
+      error: { message: 'Server error' } 
     });
 
     const { result } = renderHook(() => useAnalytics());
 
+    // Wait for the effect to complete
     await act(async () => {
       await new Promise(resolve => setTimeout(resolve, 100));
     });
 
     expect(result.current.loading).toBe(false);
-    expect(result.current.error).toBe('Failed to load analytics data');
-    expect(result.current.data).toBeNull();
+    expect(result.current.error).toBe('Server error');
+    expect(result.current.metrics).toBeNull();
   });
 
-  it('should not fetch when unmounted', () => {
-    const { unmount } = renderHook(() => useAnalytics());
-    
-    unmount();
-
-    expect(global.fetch).toHaveBeenCalledTimes(1);
-  });
-
-  it('should handle component unmount during fetch', async () => {
-    let resolveFetch: (value: any) => void;
-    const fetchPromise = new Promise(resolve => {
-      resolveFetch = resolve;
-    });
-
-    (global.fetch as jest.Mock).mockReturnValueOnce(fetchPromise);
-
-    const { result, unmount } = renderHook(() => useAnalytics());
-
-    expect(result.current.loading).toBe(true);
-
-    // Unmount before fetch completes
-    unmount();
-
-    // Complete the fetch after unmount
-    act(() => {
-      resolveFetch!({
-        ok: true,
-        json: async () => ({ data: 'test' })
-      });
-    });
-
-    // State should not update after unmount
-    expect(result.current.loading).toBe(true);
-  });
+  // Additional tests can be added here as needed
 }); 

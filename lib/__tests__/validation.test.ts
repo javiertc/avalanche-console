@@ -53,13 +53,19 @@ describe('Validation Utilities', () => {
     })
 
     it('allows https URLs in production', () => {
-      process.env.NODE_ENV = 'production'
+      Object.defineProperty(process.env, 'NODE_ENV', {
+        value: 'production',
+        writable: true
+      })
       expect(isValidWebhookUrl('https://example.com/webhook')).toBe(true)
       expect(isValidWebhookUrl('http://example.com/webhook')).toBe(false)
     })
 
     it('allows http URLs in development', () => {
-      process.env.NODE_ENV = 'development'
+      Object.defineProperty(process.env, 'NODE_ENV', {
+        value: 'development',
+        writable: true
+      })
       expect(isValidWebhookUrl('http://localhost:3000/webhook')).toBe(true)
       expect(isValidWebhookUrl('https://example.com/webhook')).toBe(true)
     })

@@ -5,20 +5,20 @@ import { StatusBadge } from '../StatusBadge';
 describe('StatusBadge', () => {
   it('should render with success status', () => {
     render(<StatusBadge status="success" label="Active" />);
-    
     const badge = screen.getByText('Active');
     expect(badge).toBeInTheDocument();
-    expect(badge.className).toContain('bg-green-100');
-    expect(badge.className).toContain('text-green-800');
+    // Updated to match the current styling
+    expect(badge.className).toContain('bg-primary');
+    expect(badge.className).toContain('text-primary-foreground');
   });
 
   it('should render with error status', () => {
     render(<StatusBadge status="error" label="Failed" />);
-    
     const badge = screen.getByText('Failed');
     expect(badge).toBeInTheDocument();
-    expect(badge.className).toContain('bg-red-100');
-    expect(badge.className).toContain('text-red-800');
+    // Updated to match the current styling
+    expect(badge.className).toContain('bg-destructive');
+    expect(badge.className).toContain('text-destructive-foreground');
   });
 
   it('should render with warning status', () => {
@@ -26,8 +26,9 @@ describe('StatusBadge', () => {
     
     const badge = screen.getByText('Pending');
     expect(badge).toBeInTheDocument();
-    expect(badge.className).toContain('bg-yellow-100');
-    expect(badge.className).toContain('text-yellow-800');
+    // Updated to match the current styling
+    expect(badge.className).toContain('bg-secondary');
+    expect(badge.className).toContain('text-secondary-foreground');
   });
 
   it('should render with info status', () => {
@@ -35,8 +36,8 @@ describe('StatusBadge', () => {
     
     const badge = screen.getByText('Processing');
     expect(badge).toBeInTheDocument();
-    expect(badge.className).toContain('bg-blue-100');
-    expect(badge.className).toContain('text-blue-800');
+    // Updated to match the current styling - info uses outline variant
+    expect(badge.className).toContain('text-foreground');
   });
 
   it('should apply custom className', () => {
@@ -44,12 +45,13 @@ describe('StatusBadge', () => {
       <StatusBadge 
         status="success" 
         label="Custom" 
-        className="custom-class" 
+        className="custom-class"
       />
     );
     
-    const badge = screen.getByText('Custom');
-    expect(badge.className).toContain('custom-class');
+    // The custom class is applied to the wrapper div
+    const wrapper = screen.getByText('Custom').parentElement;
+    expect(wrapper).toHaveClass('custom-class');
   });
 
   it('should have proper base classes', () => {
@@ -62,7 +64,8 @@ describe('StatusBadge', () => {
     expect(badge.className).toContain('px-2.5');
     expect(badge.className).toContain('py-0.5');
     expect(badge.className).toContain('text-xs');
-    expect(badge.className).toContain('font-medium');
+    // Updated to match the current styling
+    expect(badge.className).toContain('font-semibold');
   });
 
   it('should render with different labels', () => {

@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/50</span>
+                <span class='fraction'>0/52</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/17</span>
+                <span class='fraction'>0/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/49</span>
+                <span class='fraction'>0/51</span>
             </div>
         
             
@@ -626,7 +626,13 @@
 <a name='L561'></a><a href='#L561'>561</a>
 <a name='L562'></a><a href='#L562'>562</a>
 <a name='L563'></a><a href='#L563'>563</a>
-<a name='L564'></a><a href='#L564'>564</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L564'></a><a href='#L564'>564</a>
+<a name='L565'></a><a href='#L565'>565</a>
+<a name='L566'></a><a href='#L566'>566</a>
+<a name='L567'></a><a href='#L567'>567</a>
+<a name='L568'></a><a href='#L568'>568</a>
+<a name='L569'></a><a href='#L569'>569</a>
+<a name='L570'></a><a href='#L570'>570</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -884,6 +890,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -913,10 +921,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1204,7 +1216,7 @@ import { Checkbox } from <span class="cstat-no" title="statement not covered" >"
 import { Badge } from <span class="cstat-no" title="statement not covered" >"@/components/ui/badge"</span>
 import { Switch } from <span class="cstat-no" title="statement not covered" >"@/components/ui/switch"</span>
 import { RadioGroup, RadioGroupItem } from <span class="cstat-no" title="statement not covered" >"@/components/ui/radio-group"</span>
-import { toast } from "@/hooks/use-toast"
+&nbsp;
 import { WebhooksAPISlider } from <span class="cstat-no" title="statement not covered" >"@/components/ui/webhooks-api-slider"</span>
 import { ResponsiveContainer } from <span class="cstat-no" title="statement not covered" >"@/components/ui/responsive-container"</span>
 import { ResponsiveTable } from <span class="cstat-no" title="statement not covered" >"@/components/ui/responsive-table"</span>
@@ -1397,26 +1409,26 @@ export default function <span class="cstat-no" title="statement not covered" ><s
 &nbsp;
             {/* Webhooks Table */}
             &lt;ResponsiveTable
-              data={filteredWebhooks}
+              data={filteredWebhooks as unknown as Record&lt;string, unknown&gt;[]}
               columns={[
                 {
                   key: 'status',
                   label: 'Status',
-                  render: (status) =&gt; (
+                  render: (status: unknown) =&gt; (
                     &lt;Badge variant={status === "active" ? "default" : "secondary"} className="text-xs"&gt;
-                      {status}
+                      {String(status)}
                     &lt;/Badge&gt;
                   )
                 },
                 {
                   key: 'url',
                   label: 'URL',
-                  render: (url) =&gt; (
+                  render: (url: unknown) =&gt; (
                     &lt;div className="flex items-center space-x-2"&gt;
                       &lt;code className="text-xs bg-muted px-2 py-1 rounded truncate text-foreground max-w-[200px]"&gt;
-                        {url}
+                        {String(url)}
                       &lt;/code&gt;
-                      &lt;Button variant="ghost" size="icon" onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >c</span>opyToClipboard(url)}&gt;</span>
+                      &lt;Button variant="ghost" size="icon" onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >c</span>opyToClipboard(String(url))}&gt;</span>
                         &lt;Copy className="h-4 w-4" /&gt;
                       &lt;/Button&gt;
                     &lt;/div&gt;
@@ -1426,9 +1438,9 @@ export default function <span class="cstat-no" title="statement not covered" ><s
                   key: 'chainId',
                   label: 'Chain',
                   mobileHidden: true,
-                  render: (chainId) =&gt; (
+                  render: (chainId: unknown) =&gt; (
                     &lt;Badge variant="outline" className="border-border text-foreground text-xs"&gt;
-                      {chainId}
+                      {String(chainId)}
                     &lt;/Badge&gt;
                   )
                 },
@@ -1436,9 +1448,9 @@ export default function <span class="cstat-no" title="statement not covered" ><s
                   key: 'eventType',
                   label: 'Event',
                   mobileHidden: true,
-                  render: (eventType) =&gt; (
+                  render: (eventType: unknown) =&gt; (
                     &lt;Badge variant="outline" className="border-border text-foreground text-xs"&gt;
-                      {eventType}
+                      {String(eventType)}
                     &lt;/Badge&gt;
                   )
                 },
@@ -1446,57 +1458,63 @@ export default function <span class="cstat-no" title="statement not covered" ><s
                   key: 'addresses',
                   label: 'Addresses',
                   mobileHidden: true,
-                  render: (addresses) =&gt; (
-                    &lt;div&gt;
-                      {addresses.length &gt; 0 ? (
-<span class="branch-0 cbranch-no" title="branch not covered" >                        &lt;div className="space-y-1"&gt;</span>
-                          {addresses.slice(0, 1).map(<span class="fstat-no" title="function not covered" >(a</span>ddr: string, idx: number) =&gt; (
-<span class="cstat-no" title="statement not covered" >                            &lt;div</span>
-                              key={idx}
-                              className="text-xs font-mono bg-muted px-2 py-1 rounded truncate text-foreground max-w-[120px]"
-                            &gt;
-                              {addr.slice(0, 10)}...
-                            &lt;/div&gt;
-                          ))}
-                          {<span class="branch-0 cbranch-no" title="branch not covered" >addresses.length &gt; 1 &amp;&amp; (</span>
-                            &lt;div className="text-xs text-muted-foreground"&gt;
-                              +{addresses.length - 1} more
-                            &lt;/div&gt;
-                          )}
-                        &lt;/div&gt;
-                      ) : (
-                        &lt;span className="text-muted-foreground text-xs"&gt;All&lt;/span&gt;
-                      )}
-                    &lt;/div&gt;
-                  )
+                  render: <span class="fstat-no" title="function not covered" >(a</span>ddresses: unknown) =&gt; {
+                    const addrArray = <span class="cstat-no" title="statement not covered" >Array.isArray(addresses) ? addresses : []</span>
+                    return (
+                      &lt;div&gt;
+                        {addrArray.length &gt; 0 ? (
+<span class="branch-0 cbranch-no" title="branch not covered" >                          &lt;div className="space-y-1"&gt;</span>
+                            {addrArray.slice(0, 1).map(<span class="fstat-no" title="function not covered" >(a</span>ddr, idx) =&gt; (
+<span class="cstat-no" title="statement not covered" >                              &lt;div</span>
+                                key={idx}
+                                className="text-xs font-mono bg-muted px-2 py-1 rounded truncate text-foreground max-w-[120px]"
+                              &gt;
+                                {String(addr).slice(0, 10)}...
+                              &lt;/div&gt;
+                            ))}
+                            {<span class="branch-0 cbranch-no" title="branch not covered" >addrArray.length &gt; 1 &amp;&amp; (</span>
+                              &lt;div className="text-xs text-muted-foreground"&gt;
+                                +{addrArray.length - 1} more
+                              &lt;/div&gt;
+                            )}
+                          &lt;/div&gt;
+                        ) : (
+                          &lt;span className="text-muted-foreground text-xs"&gt;All&lt;/span&gt;
+                        )}
+                      &lt;/div&gt;
+                    )
+                  }
                 },
                 {
                   key: 'eventSignatures',
                   label: 'Signatures',
                   mobileHidden: true,
-                  render: (eventSignatures) =&gt; (
-                    &lt;div&gt;
-                      {eventSignatures.length &gt; 0 ? (
-<span class="branch-0 cbranch-no" title="branch not covered" >                        &lt;div className="space-y-1"&gt;</span>
-                          {eventSignatures.slice(0, 1).map(<span class="fstat-no" title="function not covered" >(s</span>ig: string, idx: number) =&gt; (
-<span class="cstat-no" title="statement not covered" >                            &lt;div</span>
-                              key={idx}
-                              className="text-xs font-mono bg-muted px-2 py-1 rounded truncate text-foreground max-w-[120px]"
-                            &gt;
-                              {sig.split('(')[0]}(...)
-                            &lt;/div&gt;
-                          ))}
-                          {<span class="branch-0 cbranch-no" title="branch not covered" >eventSignatures.length &gt; 1 &amp;&amp; (</span>
-                            &lt;div className="text-xs text-muted-foreground"&gt;
-                              +{eventSignatures.length - 1} more
-                            &lt;/div&gt;
-                          )}
-                        &lt;/div&gt;
-                      ) : (
-                        &lt;span className="text-muted-foreground text-xs"&gt;All&lt;/span&gt;
-                      )}
-                    &lt;/div&gt;
-                  )
+                  render: <span class="fstat-no" title="function not covered" >(e</span>ventSignatures: unknown) =&gt; {
+                    const sigArray = <span class="cstat-no" title="statement not covered" >Array.isArray(eventSignatures) ? eventSignatures : []</span>
+                    return (
+                      &lt;div&gt;
+                        {sigArray.length &gt; 0 ? (
+<span class="branch-0 cbranch-no" title="branch not covered" >                          &lt;div className="space-y-1"&gt;</span>
+                            {sigArray.slice(0, 1).map(<span class="fstat-no" title="function not covered" >(s</span>ig, idx) =&gt; (
+<span class="cstat-no" title="statement not covered" >                              &lt;div</span>
+                                key={idx}
+                                className="text-xs font-mono bg-muted px-2 py-1 rounded truncate text-foreground max-w-[120px]"
+                              &gt;
+                                {String(sig).split('(')[0]}(...)
+                              &lt;/div&gt;
+                            ))}
+                            {<span class="branch-0 cbranch-no" title="branch not covered" >sigArray.length &gt; 1 &amp;&amp; (</span>
+                              &lt;div className="text-xs text-muted-foreground"&gt;
+                                +{sigArray.length - 1} more
+                              &lt;/div&gt;
+                            )}
+                          &lt;/div&gt;
+                        ) : (
+                          &lt;span className="text-muted-foreground text-xs"&gt;All&lt;/span&gt;
+                        )}
+                      &lt;/div&gt;
+                    )
+                  }
                 },
                 {
                   key: 'created',
@@ -1759,7 +1777,7 @@ export default function <span class="cstat-no" title="statement not covered" ><s
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-12T02:48:05.761Z
+                at 2025-07-15T03:03:42.097Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

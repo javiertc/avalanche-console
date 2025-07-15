@@ -37,14 +37,13 @@ const processEnv = {
   NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   NEXT_PUBLIC_METRICS_API_URL: process.env.NEXT_PUBLIC_METRICS_API_URL,
   NEXT_PUBLIC_ENVIRONMENT: process.env.NEXT_PUBLIC_ENVIRONMENT,
-};
+} as const;
 
 // Don't touch the part below
 // --------------------------
 
 const merged = server.merge(client);
-/** @type z.infer<merged>
- *  @ts-expect-error - can't type this properly in jsdoc */
+/** @type z.infer<merged> */
 let env = process.env;
 
 if (!!process.env.SKIP_ENV_VALIDATION == false) {
@@ -62,9 +61,8 @@ if (!!process.env.SKIP_ENV_VALIDATION == false) {
     throw new Error('Invalid environment variables');
   }
 
-  /** @type z.infer<merged>
-   *  @ts-expect-error - can't type this properly in jsdoc */
-  env = new Proxy(parsed.data, {
+  /** @type z.infer<merged> */
+  env = new Proxy(parsed.data as any, {
     get(target, prop) {
       if (typeof prop !== 'string') return undefined;
       // Throw a descriptive error if a server-side env var is accessed on the client

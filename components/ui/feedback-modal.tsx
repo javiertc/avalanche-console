@@ -61,7 +61,7 @@ export const FeedbackModal = memo(function FeedbackModal({ isOpen, onClose }: Fe
       setSuccess(true)
       onClose()
     } catch (err) {
-      setError(err.message || 'Failed to submit feedback')
+      setError(err instanceof Error ? err.message : 'Failed to submit feedback')
     }
   }, [feedback, setLoading, setError, setSuccess, onClose])
 

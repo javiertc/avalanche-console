@@ -128,9 +128,19 @@ describe('useSlider', () => {
     const { result } = renderHook(() => useSlider({ itemsLength: 3 }));
 
     expect(result.current.isVisible).toBe(true);
+    expect(result.current.isClosing).toBe(false);
 
     act(() => {
       result.current.handleClose();
+    });
+
+    // Should trigger closing state immediately
+    expect(result.current.isClosing).toBe(true);
+    expect(result.current.isVisible).toBe(true); // Still visible during animation
+
+    // After 500ms delay, should be hidden
+    act(() => {
+      jest.advanceTimersByTime(500);
     });
 
     expect(result.current.isVisible).toBe(false);
@@ -201,18 +211,31 @@ describe('useSlider', () => {
       autoPlayInterval: 1000
     }));
 
+    const initialIndex = result.current.currentIndex;
+    
     act(() => {
       result.current.handleClose();
     });
 
-    expect(result.current.isVisible).toBe(false);
-    expect(result.current.currentIndex).toBe(0);
+    // Should trigger closing state immediately
+    expect(result.current.isClosing).toBe(true);
+    expect(result.current.isVisible).toBe(true); // Still visible during animation
 
+    // After 500ms delay, should be hidden
+    act(() => {
+      jest.advanceTimersByTime(500);
+    });
+
+    expect(result.current.isVisible).toBe(false);
+    expect(result.current.currentIndex).toBe(initialIndex);
+
+    // Advance time further to see if auto-advance is disabled
     act(() => {
       jest.advanceTimersByTime(2000);
     });
 
-    expect(result.current.currentIndex).toBe(0); // Should not advance
+    // The index should not change after closing and advancing time
+    expect(result.current.currentIndex).toBe(initialIndex);
   });
 
   it('should not auto-advance when only one item', () => {

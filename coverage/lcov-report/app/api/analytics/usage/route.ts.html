@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">38.46% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>5/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">36.36% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>4/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -82,8 +82,21 @@
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -98,11 +111,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { NextResponse } from 'next/server';
 import type { ApiUsageData } from '@/types/analytics';
+import { withApiErrorHandler, ApiError } from '@/lib/api-error';
 &nbsp;
 // This would typically come from your database or analytics service
 const mockApiUsageData: ApiUsageData[] = [
@@ -115,19 +140,30 @@ const mockApiUsageData: ApiUsageData[] = [
   { date: "Dec 24", dataApi: 2100, rpc: 1300, webhooks: 67, total: 3467 },
 ];
 &nbsp;
-export async function GET() {
-  // Add artificial delay to simulate real API latency
-  await new Promise(resolve =&gt; setTimeout(resolve, 500));
+export const GET = withApiErrorHandler(<span class="fstat-no" title="function not covered" >async (r</span>equest: Request) =&gt; {
+  // Example: Check for authentication (in real app, use proper auth)
+  const authHeader = <span class="cstat-no" title="statement not covered" >request.headers.get('authorization');</span>
+<span class="cstat-no" title="statement not covered" >  if (!authHeader) {</span>
+<span class="cstat-no" title="statement not covered" >    throw ApiError.unauthorized('API key required');</span>
+  }
   
-  return NextResponse.json(mockApiUsageData);
-} </pre></td></tr></table></pre>
+  // Add artificial delay to simulate real API latency
+<span class="cstat-no" title="statement not covered" >  await new Promise(<span class="fstat-no" title="function not covered" >resolve =&gt; <span class="cstat-no" title="statement not covered" >s</span>etTimeout(resolve, 500));</span></span>
+  
+  // Example: Simulate potential database error
+<span class="cstat-no" title="statement not covered" >  if (Math.random() &lt; 0.1) { // 10% chance of error for demo</span>
+<span class="cstat-no" title="statement not covered" >    throw ApiError.internal('Database connection failed');</span>
+  }
+  
+<span class="cstat-no" title="statement not covered" >  return NextResponse.json(mockApiUsageData);</span>
+}); </pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-12T02:48:05.761Z
+                at 2025-07-15T03:03:42.097Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

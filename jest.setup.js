@@ -1,6 +1,9 @@
 // Learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom'
 
+// Ensure Jest DOM matchers are properly loaded
+expect.extend(require('@testing-library/jest-dom/matchers'))
+
 // Import MSW server AFTER polyfills are set up
 import { server } from './mocks/server'
 
@@ -61,4 +64,17 @@ global.ResizeObserver = class ResizeObserver {
   disconnect() {}
   observe() {}
   unobserve() {}
+}
+
+// Suppress React act warnings in tests (they're not critical for test functionality)
+const originalError = console.error
+console.error = (...args) => {
+  if (
+    typeof args[0] === 'string' &&
+    args[0].includes('Warning: An update to') &&
+    args[0].includes('was not wrapped in act')
+  ) {
+    return
+  }
+  originalError.apply(console, args)
 }

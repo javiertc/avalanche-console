@@ -98,7 +98,7 @@ ${colorConfig
 
 const ChartTooltip = RechartsPrimitive.Tooltip
 
-interface ChartTooltipContentProps extends Omit<TooltipProps<ValueType, NameType>, "ref" | "formatter"> {
+interface ChartTooltipContentProps extends Omit<TooltipProps<ValueType, NameType>, "ref" | "formatter" | "labelFormatter"> {
   hideLabel?: boolean
   hideIndicator?: boolean
   indicator?: "line" | "dot" | "dashed"

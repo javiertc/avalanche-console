@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import dynamic from 'next/dynamic'
 import { Key, BarChart3 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -11,6 +11,9 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { ApiKeyTable, ApiKey } from '@/components/common'
 import { Badge } from "@/components/ui/badge"
 import { TrendingUp, TrendingDown, Minus } from "lucide-react"
+import { SectionErrorBoundary, PageErrorBoundary } from "@/components/ui/error-boundary"
+import { apiKeysService, analyticsService } from "@/lib/api"
+import { useToast } from "@/hooks/use-toast"
 
 // Dynamic imports for recharts to avoid SSR issues
 const BarChart = dynamic(() => import('recharts').then(mod => mod.BarChart), { ssr: false })
@@ -217,54 +220,112 @@ function MetricsBarChart({ data, title, description, color = "hsl(var(--primary)
 export default function ApiKeysPage() {
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [keyName, setKeyName] = useState("")
+  const [apiKeysData, setApiKeysData] = useState<ApiKey[]>(apiKeys)
+  const [loading, setLoading] = useState(false)
+  const { toast } = useToast()
 
-  const handleCreateKey = () => {
-    // TODO: Implement API key creation logic
-    console.log("Creating key:", keyName)
-    setShowCreateModal(false)
-    setKeyName("")
+  const fetchApiKeys = async () => {
+    setLoading(true)
+    try {
+      const result = await apiKeysService.getApiKeys()
+      if (result.success) {
+        setApiKeysData(result.data)
+      } else {
+        console.error('Failed to fetch API keys:', result.error)
+        // Fall back to mock data
+        setApiKeysData(apiKeys)
+      }
+    } catch (error) {
+      console.error('Error fetching API keys:', error)
+      // Fall back to mock data
+      setApiKeysData(apiKeys)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchApiKeys()
+  }, [])
+
+  const handleCreateKey = async () => {
+    if (!keyName.trim()) return;
+    
+    try {
+      const result = await apiKeysService.createApiKey({ name: keyName.trim() });
+      
+      if (result.success) {
+        // Show success message
+        toast({
+          title: "API Key Created",
+          description: `Successfully created API key: ${result.data.name}`,
+        });
+        
+        // Refresh the keys list
+        await fetchApiKeys();
+        
+        setShowCreateModal(false);
+        setKeyName("");
+      } else {
+        throw new Error(result.error.message);
+      }
+    } catch (error) {
+      console.error("Failed to create API key:", error);
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "Failed to create API key",
+        variant: "destructive",
+      });
+    }
   }
 
   return (
-    <div style={{ width: '100%', padding: '24px 32px' }}>
-      {/* Page Header */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">API Keys</h1>
-            <p className="text-muted-foreground mt-2">
-              Create and manage your API keys for accessing Avalanche services
-            </p>
+    <PageErrorBoundary name="ApiKeysPage">
+      <div style={{ width: '100%', padding: '24px 32px' }}>
+        {/* Page Header */}
+        <SectionErrorBoundary name="PageHeader">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">API Keys</h1>
+                <p className="text-muted-foreground mt-2">
+                  Create and manage your API keys for accessing Avalanche services
+                </p>
+              </div>
+              <Button 
+                onClick={() => setShowCreateModal(true)}
+                className="flex items-center gap-2"
+                disabled={loading}
+              >
+                <Key className="h-4 w-4" />
+                New Key
+              </Button>
+            </div>
           </div>
-          <Button 
-            onClick={() => setShowCreateModal(true)}
-            className="flex items-center gap-2"
-          >
-            <Key className="h-4 w-4" />
-            New Key
-          </Button>
-        </div>
-      </div>
+        </SectionErrorBoundary>
 
-      {/* API Keys Table */}
-      <div className="space-y-4 mt-8">
-        <div>
-          <h3 className="text-lg font-medium mb-1">Your API Keys</h3>
-          <p className="text-sm text-muted-foreground">
-            Manage your API keys below and see our API docs to get started
-          </p>
-        </div>
-        <ApiKeyTable keys={apiKeys} />
-      </div>
+        {/* API Keys Table */}
+        <SectionErrorBoundary name="ApiKeysTable">
+          <div className="space-y-4 mt-8">
+            <div>
+              <h3 className="text-lg font-medium mb-1">Your API Keys</h3>
+              <p className="text-sm text-muted-foreground">
+                Manage your API keys below and see our API docs to get started
+              </p>
+            </div>
+            <ApiKeyTable keys={apiKeysData} loading={loading} />
+          </div>
+        </SectionErrorBoundary>
 
-      {/* Metrics Section */}
-      <div className="space-y-6 mt-12">
-        <div className="flex items-center gap-2">
-          <BarChart3 className="h-5 w-5" />
-          <h2 className="text-xl font-semibold">Metrics</h2>
-        </div>
-        
-        <div className="space-y-6">
+        {/* Metrics Section */}
+        <SectionErrorBoundary name="MetricsSection">
+          <div className="space-y-6 mt-12">
+            <div className="flex items-center gap-2">
+              <BarChart3 className="h-5 w-5" />
+              <h2 className="text-xl font-semibold">Metrics</h2>
+            </div>
+            
+            <div className="space-y-6">
           <MetricsBarChart
             data={apiRequestsData}
             title="Total API Requests"
@@ -429,7 +490,9 @@ export default function ApiKeysPage() {
               </div>
             </CardContent>
           </Card>
-        </div>
+            </div>
+          </div>
+        </SectionErrorBoundary>
       </div>
 
       {/* Create API Key Modal */}
@@ -473,6 +536,6 @@ export default function ApiKeysPage() {
           </div>
         </DialogContent>
       </Dialog>
-    </div>
+    </PageErrorBoundary>
   )
 } 
