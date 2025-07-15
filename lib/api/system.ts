@@ -1,7 +1,7 @@
 import { apiClient } from '../api-client';
 import type { AsyncResult } from '@/types/common';
 
-export interface SystemService {
+export interface SystemServiceData {
   name: string;
   status: 'operational' | 'degraded' | 'outage' | 'maintenance';
   uptime: number;
@@ -17,7 +17,7 @@ export interface SystemService {
 
 export interface SystemHealth {
   overall: 'healthy' | 'degraded' | 'unhealthy';
-  services: SystemService[];
+  services: SystemServiceData[];
   lastUpdated: string;
 }
 

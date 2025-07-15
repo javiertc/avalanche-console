@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 import { CODE_EXAMPLES } from '@/constants/metrics';
-import { CodeExampleTabs, codeExamplePresets } from '@/components/common';
-import { layoutStyles } from '@/lib/styles';
+import { CodeExampleTabs } from '@/components/common';
 
 interface CodeExamplesProps {
   chainId: string;

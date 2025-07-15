@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 // Mock data store (in production, this would be a database)
-let mockApiKeys = [
+const mockApiKeys = [
   {
     id: '1',
     key: 'my-key (****mGmE)',

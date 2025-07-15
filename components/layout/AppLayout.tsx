@@ -71,7 +71,7 @@ export const AppLayout = memo(function AppLayout({ children }: AppLayoutProps) {
           </SidebarHeader>
           <SidebarContent className="px-4 py-4">
             <SidebarMenu className="space-y-1">
-              {navigationItemsWithActiveState.map((item, index) => {
+              {navigationItemsWithActiveState.map((item, _index) => {
                 return (
                   <React.Fragment key={item.name}>
                     <SidebarMenuItem>

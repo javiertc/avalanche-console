@@ -12,7 +12,7 @@ import { ApiKeyTable, ApiKey } from '@/components/common'
 import { Badge } from "@/components/ui/badge"
 import { TrendingUp, TrendingDown, Minus } from "lucide-react"
 import { SectionErrorBoundary, PageErrorBoundary } from "@/components/ui/error-boundary"
-import { apiKeysService, analyticsService } from "@/lib/api"
+import { apiKeysService } from "@/lib/api"
 import { useToast } from "@/hooks/use-toast"
 
 // Dynamic imports for recharts to avoid SSR issues

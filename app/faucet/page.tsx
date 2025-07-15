@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Copy } from "lucide-react"
+// import { Copy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -11,7 +11,7 @@ import { networks, tokens, codeSnippets } from "@/constants/faucet"
 import { ResponsiveContainer } from "@/components/ui/responsive-container"
 import { FaucetSlider } from "@/components/ui/faucet-slider"
 import { layoutStyles } from "@/lib/styles"
-import { copyToClipboard } from "@/lib/utils"
+// import { copyToClipboard } from "@/lib/utils"
 import { CodeExampleTabs, codeExamplePresets } from "@/components/common"
 
 export default function Faucet() {
@@ -19,7 +19,7 @@ export default function Faucet() {
   const [selectedToken, setSelectedToken] = useState("avax")
   const [address, setAddress] = useState("")
   const [couponCode, setCouponCode] = useState("")
-  const [activeCodeTab, setActiveCodeTab] = useState("Javascript SDK")
+  // const [activeCodeTab, setActiveCodeTab] = useState("Javascript SDK")
 
 
 

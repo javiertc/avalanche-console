@@ -63,7 +63,7 @@ export function CodeSnippet({
   className = '',
   showLineNumbers = false
 }: CodeSnippetProps) {
-  const { theme, resolvedTheme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
   // Ensure component is mounted before using theme to avoid hydration mismatch

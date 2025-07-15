@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import type { ApiKey, CreateApiKeyRequest, CreateApiKeyResponse } from '@/lib/api/api-keys';
 
 // Mock data store (in production, this would be a database)
-let mockApiKeys: ApiKey[] = [
+const mockApiKeys: ApiKey[] = [
   {
     id: '1',
     key: 'my-key (****mGmE)',

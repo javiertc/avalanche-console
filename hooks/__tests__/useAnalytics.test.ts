@@ -1,6 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
 import { useAnalytics } from '../useAnalytics';
-import { createMockAnalyticsService } from '@/__tests__/utils/test-utils';
 
 // Mock the analytics service
 jest.mock('@/lib/api', () => ({

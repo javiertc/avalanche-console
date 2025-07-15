@@ -1,8 +1,8 @@
 "use client"
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CopyButton, CodeExampleTabs, codeExamplePresets } from '@/components/common';
 import { ResponsiveContainer } from "@/components/ui/responsive-container";
 
@@ -11,7 +11,7 @@ import { METRICS_API_BASE_URL, METRIC_TYPES, CODE_EXAMPLES } from '@/constants/m
 import { Zap } from "lucide-react";
 
 export default function MetricsAPIPage() {
-  const [activeTab, setActiveTab] = useState("curl");
+  // const [activeTab, setActiveTab] = useState("curl");
 
   return (
     <ResponsiveContainer>

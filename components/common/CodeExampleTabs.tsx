@@ -87,7 +87,7 @@ export const CodeExampleTabs = memo(function CodeExampleTabs({
 }: CodeExampleTabsProps) {
   const tabs = Object.keys(examples);
   const [activeTab, setActiveTab] = useState(defaultTab || tabs[0]);
-  const { theme, resolvedTheme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   // Ensure component is mounted before using theme to avoid hydration mismatch

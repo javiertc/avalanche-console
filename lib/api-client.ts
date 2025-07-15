@@ -30,6 +30,7 @@ export class APIClient {
    * Clear authorization header
    */
   clearAuthToken() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { Authorization, ...headers } = this.defaultHeaders as Record<string, string>;
     this.defaultHeaders = headers;
   }
