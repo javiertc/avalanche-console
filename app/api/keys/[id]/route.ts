@@ -24,10 +24,10 @@ const mockApiKeys = [
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await context.params;
     
     const keyIndex = mockApiKeys.findIndex(key => key.id === id);
     if (keyIndex === -1) {
@@ -54,10 +54,10 @@ export async function DELETE(
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await context.params;
     const updates = await request.json();
     
     const keyIndex = mockApiKeys.findIndex(key => key.id === id);
